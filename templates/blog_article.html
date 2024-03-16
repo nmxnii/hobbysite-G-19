@@ -1,0 +1,20 @@
+{% extends "base.html" %}
+{% load static %}
+
+{% block title %}
+    {{ article.title }}
+{% endblock title %}
+
+{% block content %}
+    <article>
+        <header>
+            <h1>{{ article.title }}</h1>
+            <h2>Category: <a href="{{ article.category.get_absolute_url }}">{{ article.category.name }}</a></h2>
+        </header>
+        <section>
+            <p>Created On: {{ article.created_on }}</p>
+            <p>Last Updated On: {{ article.updated_on }}</p>
+            <p>{{ article.entry }}</p>
+        </section>
+    </article>
+{% endblock content %}
