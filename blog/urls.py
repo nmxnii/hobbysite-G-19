@@ -8,3 +8,5 @@ urlpatterns = [
     path('blog/article/<int:pk>', BlogDetailView.as_view(), name=
          'blog_detail')
 ]
+
+app_name = 'blog'
