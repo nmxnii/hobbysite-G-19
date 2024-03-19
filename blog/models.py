@@ -4,7 +4,6 @@ from django.urls import reverse
 class ArticleCategory(models.Model):
     name = models.CharField(max_length=255)
     description = models.TextField()
-    articles = models.ForeignKey('Article', on_delete=models.SET_NULL, null=True, related_name='categories')
 
     class Meta:
         ordering = ['name']
@@ -14,7 +13,7 @@ class ArticleCategory(models.Model):
 
 class Article(models.Model):
     title = models.CharField(max_length=255)
-    category = models.ForeignKey(ArticleCategory, on_delete=models.SET_NULL, null=True)
+    category = models.ForeignKey(ArticleCategory, on_delete=models.SET_NULL, null=True, blank=True)
     entry = models.TextField()
     created_on = models.DateTimeField(auto_now_add=True)
     updated_on = models.DateTimeField(auto_now=True)
@@ -24,7 +23,11 @@ class Article(models.Model):
 
 
     def __str__(self):
-        return self.name
+        return self.title
+    
+    def get_absolute_url(self):
+        return reverse('blog:article_detail', args=str(self.pk))
+    
     
 
 
