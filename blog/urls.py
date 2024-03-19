@@ -4,9 +4,8 @@ from django.urls import path
 from .views import BlogArticleView, BlogDetailView
 
 urlpatterns = [
-    path('blog/articles/', BlogArticleView.as_view(), name='article'),
-    path('blog/article/<int:pk>', BlogDetailView.as_view(), name=
-         'blog_detail')
+    path('articles/', BlogArticleView.as_view(), name='article_list'),
+    path('article/<int:pk>', BlogDetailView.as_view(), name='article_detail')
 ]
 
 app_name = 'blog'
