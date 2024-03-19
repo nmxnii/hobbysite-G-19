@@ -13,23 +13,11 @@
     </head>
     <body>
         <h1>
-            <a href="/blog/article">Blog</a>
+            <a href="/blog/articles">Blog</a>
         </h1>
-        {% if request.user.is_authenticated %}
-            <form action="{% url 'logout' %}" method="post">
-                {% csrf_token %}
-                <button type="submit">Logout</button>
-            </form>
-        {% else %}
-            <form action="{% url 'login' %}" method="get">
-                <button type="submit">Login</button>
-            </form>
-        {% endif %}
         <div id="content">
             {% block content %}
             {% endblock content %}
         </div>
-        {% block scripts %}
-        {% endblock scripts %}
     </body>
 </html>
