@@ -22,7 +22,7 @@ class Product(models.Model):
         null=True
     )
     description = models.TextField()
-    price = models.DecimalField(max_digits=5, decimal_places=2)
+    price = models.DecimalField(max_digits=100, decimal_places=2)
 
     class Meta:
         ordering = ['name']
