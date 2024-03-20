@@ -45,7 +45,6 @@ INSTALLED_APPS = [
 
 
     'commissions'
-    #four empty lines so that when we merge we wont have problems, bcs we add more lines so there might be conflict
 ]
 
 MIDDLEWARE = [
