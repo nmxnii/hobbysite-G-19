@@ -1,0 +1,65 @@
+{% extends 'base.html' %}
+{%load static%}
+{%block styles %}
+<style>
+    body {
+        font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+        margin: 0;
+        padding: 0;
+        background-color: #f8f9fa; 
+        color: #333; 
+    }
+
+    h1 {
+        text-align: center;
+        padding: 20px 0;
+        font-size: 2.5rem; 
+        color: #0077b6; 
+    }
+
+    h2 {
+        font-size: 2rem; 
+        color: #0077b6; 
+    }
+    
+
+    a {
+        text-decoration: none;
+        color: #0077b6; 
+        transition: color 0.3s ease; 
+    }
+
+    a:hover {
+        color: #762151; 
+    }
+
+    #content {
+        max-width: 800px;
+        margin: 1px auto; 
+        padding: 20px;
+        background-color: #fff; 
+        border-radius: 8px; 
+        box-shadow: 0 0 20px rgba(0, 0, 0, 0.1);
+    }
+    li {
+        font-size: 1.5rem;
+    }
+
+</style>
+{% endblock styles %}
+
+{% block content %}
+<h1>
+    <a href="/wiki/articles">BLOG </a>
+</h1>
+    <h2>List of Articles</h2>
+    <ul>
+        {% for article in object_list %}
+            <li>
+                <a href="{{ article.get_absolute_url }}">
+                    {{ article }}
+                </a>
+            </li>
+        {% endfor %}
+    </ul>
+{% endblock content %}
