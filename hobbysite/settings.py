@@ -42,7 +42,7 @@ INSTALLED_APPS = [
     'django.contrib.messages',
     'django.contrib.staticfiles',
     'merchstore'
-
+    'wiki'
 
 
     #four empty lines so that when we merge we wont have problems, bcs we add more lines so there might be conflict
