@@ -1,23 +1,18 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang = "en">
+    {%block styles%}
+    {%endblock styles%}
     <head>
-        <meta charset="UTF-8">
-        <meta name="viewport" content="width=device-width, initial-scale=1.0">
         <title>
-            {% block title %}
-                Blog
-            {% endblock title %}
         </title>
-        {% block styles %}
-        {% endblock styles %}
-    </head>
+        <header>
+                {% block header %}{%endblock%}
+        </header>
+    </head>    
     <body>
-        <h1>
-            <a href="/blog/articles">Blog</a>
-        </h1>
-        <div id="content">
-            {% block content %}
-            {% endblock content %}
-        </div>
+
+            <div id = "content">
+                {% block content %}{% endblock %} 
+            </div>
     </body>
 </html>
