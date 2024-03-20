@@ -44,10 +44,7 @@ INSTALLED_APPS = [
     'merchstore'
     'wiki'
     'blog'
-
-
-
-    #four empty lines so that when we merge we wont have problems, bcs we add more lines so there might be conflict
+    'commissions'
 ]
 
 MIDDLEWARE = [
