@@ -1,11 +1,20 @@
-{% extends 'merchstore_base.html' %}
+{% extends 'base.html' %}
+{%block header%}
+<h1>Merchandise Store!</h1>
+{%endblock%}
 {% block content %}
     <ul>
-        <h3>[Product Type]: [Product]</h3>
-        {% for product in object_list %}
-
-            <h2>{{product.ProductType.name}}: <a href= "{{ product.get_absolute_url }}" > {{product}} </a></h2>
-            
-        {% endfor %}
+        {%for productType in object_list%}
+        <p>  <font size="+2"><b>{{productType.name}}: </b></font>
+        <br>{{productType.description}}
+        </p>
+            {% for productT in productType.product.all %}
+            <ul>
+                <li>
+                    <a href= "{{ productT.get_absolute_url }}" > {{productT.name}} </a>
+                </li>
+            </ul>
+            {% endfor %}
+        {%endfor%}
     </ul>
 {% endblock %}
