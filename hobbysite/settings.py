@@ -41,11 +41,11 @@ INSTALLED_APPS = [
     'django.contrib.sessions',
     'django.contrib.messages',
     'django.contrib.staticfiles',
+    
+    'wiki'
 
-    'wiki',
 
-
-    # four empty lines so that when we merge we wont have problems, bcs we add more lines so there might be conflict
+    #four empty lines so that when we merge we wont have problems, bcs we add more lines so there might be conflict
 ]
 
 MIDDLEWARE = [
@@ -63,8 +63,7 @@ ROOT_URLCONF = 'hobbysite.urls'
 TEMPLATES = [
     {
         'BACKEND': 'django.template.backends.django.DjangoTemplates',
-        # to include templates folder
-        'DIRS': [os.path.join(BASE_DIR, 'templates')],
+        'DIRS': [os.path.join(BASE_DIR,'templates')], #to include templates folder
         'APP_DIRS': True,
         'OPTIONS': {
             'context_processors': [
