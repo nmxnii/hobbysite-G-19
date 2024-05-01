@@ -1,0 +1,86 @@
+{% extends "base.html" %}
+{% load static %}
+{% block styles %}
+
+<style>
+    body {
+         font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+         margin: 0;
+         padding: 0;
+         background-color: #f8f9fa; 
+         color: #333; 
+    }
+
+    h1 {
+    
+         text-align: center;
+         padding: 20px 0;
+         font-size: 2.5rem; 
+         color: #007bff; 
+    }
+    h2{
+         font-size: 20px
+    }
+    h3{
+         margin: 0.3
+    }
+    
+
+    a {
+         text-decoration: none;
+         color: #007bff; 
+         transition: color 0.3s ease; 
+    }
+
+    a:hover {
+         color: #0056b3; 
+    }
+
+    #content {
+         max-width: 800px;
+         margin: 20px auto; 
+         padding: 20px;
+         background-color: #fff; 
+         border-radius: 8px; 
+         box-shadow: 0 0 20px rgba(0, 0, 0, 0.1);
+    }
+    .time{
+         margin-top: 0px;
+         margin-bottom: 0px;
+         font-style: italic
+    }
+    .subtitles{
+         text-align: left;
+         margin-top: -16px;
+         margin-bottom: -16px;
+         font-weight: 100;
+    }
+    h4{
+         font-size: 20px;
+         margin-top:8px;
+         margin-bottom: 8px;
+    }
+    .content{
+         font-weight: 100;
+    }
+
+</style>
+{% endblock styles %}
+
+
+{% block content %}
+<h1>Welcome to our Hobby Site!</h1>
+<h2>Lists of Apps: </h2>
+
+
+
+
+<h2>
+   <h2><a href="/merchstore/items/"> Merchandise Store</a>    </h2> 
+    <h2><a href="/wiki/articles/">Wiki</a> </h2>
+    <h2><a href="/blog/articles/">Blog</a></h2>
+    <h2><a href="/commissions/list/">Commissions </a></h2>
+</h2>
+
+
+{% endblock content%}
