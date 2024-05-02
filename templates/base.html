@@ -1,18 +1,20 @@
 <!DOCTYPE html>
-<html lang = "en">
-    {%block styles%}
-    {%endblock styles%}
-    <head>
-        <title>
-        </title>
-        <header>
-                {% block header %}{%endblock%}
-        </header>
-    </head>    
-    <body>
-
-            <div id = "content">
-                {% block content %}{% endblock %} 
-            </div>
-    </body>
+<html lang="en">
+  {%block styles%} {%endblock styles%}
+  <head>
+    <title> </title>
+    <header>{% block header %}{%endblock%}</header>
+  </head>
+  <body>
+    <div id="content">
+      {% if request.user.is_authenticated %} 
+        {% block content %}
+        {% endblock %}
+        <form action="{% url 'logout' %}" method="POST">
+            {% csrf_token %}
+            <button type="submit">LOG OUT</button>
+        </form> 
+      {% endif %}
+    </div>
+  </body>
 </html>
