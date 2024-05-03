@@ -69,6 +69,8 @@
 
 
 {% block content %}
+<h1><a href="{% url 'profile:profile-detail' request.user.pk %}">Profile</a></h1>
+
 <h1>Welcome to our Hobby Site!</h1>
 <h2>Lists of Apps: </h2>
 
