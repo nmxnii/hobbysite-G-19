@@ -69,6 +69,7 @@
    <h1>
        <a href="/blog/articles">BLOG </a>
    </h1>
+   {% if article.header_image %}<img src="{{ article.header_image.url }}" alt="{{ article.title }} Header Image">{% endif %}
    <h2>Article Title: {{ article.title }}</h2>
    <h3>Author: {{ article.author }} </h3>
    <p>Category: {{ article.category}}</p>

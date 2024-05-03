@@ -17,6 +17,7 @@ class Article(models.Model):
     title = models.CharField(max_length=255)
     author = models.ForeignKey(Profile, on_delete=models.SET_NULL, null=True, blank=True)
     category = models.ForeignKey(ArticleCategory, on_delete=models.SET_NULL, null=True, blank=True)
+    header_image = models.ImageField(upload_to='article_headers/', null=True, blank=True)
     entry = models.TextField()
     created_on = models.DateTimeField(auto_now_add=True)
     updated_on = models.DateTimeField(auto_now=True)
