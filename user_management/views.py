@@ -6,25 +6,27 @@ from .forms import *
 from django.contrib.auth.mixins import LoginRequiredMixin
 
 
-
 class ProfileUpdateView(UpdateView):
     model = Profile
-    form_class= ProfileUpdateForm
-    template_name= 'profile_update.html'
-    
+    form_class = ProfileUpdateForm
+    template_name = 'profile_update.html'
+
     def get_success_url(self) -> str:
         return reverse_lazy("profile:profile-detail", kwargs={"pk": self.object.pk})
+
 
 class ProfileDetailView(DetailView):
-    model=Profile
-    template_name='profile_detail.html'
+    model = Profile
+    template_name = 'profile_detail.html'
+
 
 class ProfileCreateView(CreateView):
-    model=Profile  
-    form_class=ProfileCreateForm
-    template_name= 'profile_update.html'
+    model = Profile
+    form_class = ProfileCreateForm
+    template_name = 'profile_create.html'
+
     def get_success_url(self) -> str:
         return reverse_lazy("profile:profile-detail", kwargs={"pk": self.object.pk})
-    
+
 
 # Create your views here.
