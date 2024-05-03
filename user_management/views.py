@@ -13,7 +13,7 @@ class ProfileUpdateView(UpdateView):
     template_name= 'profile_update.html'
     
     def get_success_url(self) -> str:
-        return reverse_lazy("profile:profile-detail", kwargs={"pk": self.object.user.pk})
+        return reverse_lazy("profile:profile-detail", kwargs={"pk": self.object.pk})
 
 class ProfileDetailView(DetailView):
     model=Profile
@@ -24,7 +24,7 @@ class ProfileCreateView(CreateView):
     form_class=ProfileCreateForm
     template_name= 'profile_update.html'
     def get_success_url(self) -> str:
-        return reverse_lazy("profile:profile-detail", kwargs={"pk": self.object.user.pk})
+        return reverse_lazy("profile:profile-detail", kwargs={"pk": self.object.pk})
     
 
 # Create your views here.
