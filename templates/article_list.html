@@ -53,6 +53,7 @@
     <a href="/blog/articles">BLOG </a>
 </h1>
 <ul>
+    <h4><a href="/home">  &larr; Return to Homepage </a></h>
     <h2> Your Articles </h2>
     {% for category in article_category %}
         <h3> {{ category }} </h3>
@@ -76,4 +77,6 @@
     {% endfor %}
 {% endfor %}
 </ul>
+<h4> <a href="{% url 'blog:article_create' %}">Add Article</a> </h4>
+
 {% endblock content %}
