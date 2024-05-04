@@ -50,16 +50,30 @@
 
 {% block content %}
 <h1>
-    <a href="/wiki/articles">BLOG </a>
+    <a href="/blog/articles">BLOG </a>
 </h1>
-    <h2>List of Articles</h2>
-    <ul>
+<ul>
+    <h2> Your Articles </h2>
+    {% for category in article_category %}
+        <h3> {{ category }} </h3>
         {% for article in object_list %}
-            <li>
-                <a href="{{ article.get_absolute_url }}">
-                    {{ article }}
-                </a>
-            </li>
+            {% if article.category.id == category.id and article.author == request.user.profile %}
+                <li>
+                    <a href="{{ article.get_absolute_url }}">{{ article.title }}</a>
+                </li>
+            {% endif %}
         {% endfor %}
-    </ul>
+    {% endfor %}
+    <h2> All Articles </h2>
+    {% for category in article_category %}
+    <h3> {{ category }} </h3>
+    {% for article in object_list %}
+        {% if article.category.id == category.id and article.author != request.user.profile %}
+            <li>
+                <a href="{{ article.get_absolute_url }}">{{ article.title }} </a>
+            </li>
+        {% endif %}
+    {% endfor %}
+{% endfor %}
+</ul>
 {% endblock content %}
