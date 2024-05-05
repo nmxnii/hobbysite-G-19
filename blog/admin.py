@@ -8,7 +8,6 @@ class ArticleAdmin(admin.ModelAdmin):
     search_fields = ('title',)
     list_filter = ('category',)
 
-
 class ArticleCategoryAdmin(admin.ModelAdmin):
     model = ArticleCategory
     search_fields = ('name',)
