@@ -24,8 +24,6 @@
        color: #0077b6;
    }
   
-
-
    a {
        text-decoration: none;
        color: #0077b6;
@@ -60,6 +58,11 @@
        font-size: 0.7rem;
    }
 
+   img {
+       max-width: 850px;
+       max-height: 450px;
+   }
+
 
 </style>
 {% endblock styles %}
@@ -71,7 +74,6 @@
        <h4><a href="/blog/articles"> &larr; Return to Article List </a></h4>
    </h1>
    {% if article.header_image %}<img src="{{ article.header_image.url }}" alt="{{ article.title }} Header Image">{% endif %}
-
    {% if article.author == request.user.profile %}
         <a href="{% url 'blog:article_update' pk=article.pk %}">Update Article</a>
     {% endif %}
@@ -84,5 +86,27 @@
    <p id="date">Created on: {{ article.created_on }}</p>
    <p id="date">Updated on: {{ article.updated_on }}</p>
 
+   <h2>Other Articles by {{ request.user.profile }}</h2>
+   <ul>
+       {% for other_article in request.user.profile.article_set.all %}
+           {% if other_article != object %}
+               <li><a href="{{ other_article.get_absolute_url }}">{{ other_article.title }}</a></li>
+           {% endif %}
+       {% endfor %}
+   </ul>
 
+   <h3>Add a Comment</h3>
+    <form method="post">
+        {% csrf_token %}
+        {{ comment_form.as_p }}
+        <button type="submit">Submit</button>
+    </form>
+
+    <h3>Comments</h3>
+<ul>
+    {% for comment in comments %}
+        <li>{{ comment.author.username }}: {{ comment.entry }}</li>
+    {% endfor %}
+</ul>
+   
 {% endblock content %}
