@@ -1,16 +1,16 @@
 from django.contrib import admin
-from .models import Commission, Comment
+from .models import Commission, Job
 
 
-class CommentInline(admin.TabularInline):
-    model = Comment
+class JobInline(admin.TabularInline):
+    model = Job
 
 
 class CommissionAdmin(admin.ModelAdmin):
     model = Commission
-    list_display = ('title', 'description', 'people_required',
-                    'created_on', 'updated_on')
-    inlines = [CommentInline,]
+    list_display = ('title', 'description','created_on', 'updated_on')
+    inlines = [JobInline,]
 
 
 admin.site.register(Commission, CommissionAdmin)
+
