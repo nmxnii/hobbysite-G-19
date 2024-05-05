@@ -55,6 +55,7 @@
 <ul>
     <h4><a href="/home">  &larr; Return to Homepage </a></h>
     <h2> Your Articles </h2>
+    <h4> <a href="{% url 'blog:blog_gallery_view' %}">Switch to Gallery View</a> </h4>
     {% for category in article_category %}
         <h3> {{ category }} </h3>
         {% for article in object_list %}
@@ -78,5 +79,5 @@
 {% endfor %}
 </ul>
 <h4> <a href="{% url 'blog:article_create' %}">Add Article</a> </h4>
-
 {% endblock content %}
+
