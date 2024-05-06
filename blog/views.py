@@ -75,5 +75,5 @@ class ImageGalleryView(ListView):
 
     def get_context_data(self, **kwargs):
         context = super().get_context_data(**kwargs)
-        context['articles'] = Article.objects.all()  # Assuming you want to display all articles
+        context['articles'] = Article.objects.all() 
         return context
