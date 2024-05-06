@@ -1,6 +1,6 @@
 {% extends "base.html" %}
 {% load static %}
-{% block styles %}
+{% comment %} {% block styles %}
 
 <style>
     body {
@@ -63,13 +63,24 @@
     .content{
          font-weight: 100;
     }
+    nav {
+    font-size: 40px;
+    margin-top: 8px;
+    margin-bottom: 8px;
+    display: inline-block;
+    text-align: center;
+    background-color: #CCCCCC;
+    overflow: hidden;
+    width: 100%; /* Change width to 100% */
+    margin: auto;
+}
 
 </style>
-{% endblock styles %}
+{% endblock styles %} {% endcomment %}
 
 
 {% block content %}
-<h1><a href="{% url 'profile:profile-detail' request.user.pk %}">Profile</a></h1>
+<h1><a href="{% url 'profile:profile-detail' request.user.pk %}">Welcome {{ request.user.profile.display_name }}</a></h1>
 
 <h1>Welcome to our Hobby Site!</h1>
 <h2>Lists of Apps: </h2>
