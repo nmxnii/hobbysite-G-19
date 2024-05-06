@@ -26,7 +26,7 @@ class ProfileCreateView(CreateView):
     template_name = 'profile_create.html'
 
     def get_success_url(self) -> str:
-        return reverse_lazy("profile:profile-detail", kwargs={"pk": self.object.pk})
+        return reverse("profile:profile-detail", kwargs={"pk": self.object.pk})
 
 
 # Create your views here.
