@@ -32,7 +32,7 @@ urlpatterns = [
     path("accounts/", include("django.contrib.auth.urls")),
     path("accounts/", include("accounts.urls")),    
     path("profile/", include("user_management.urls", namespace="profile")),
-    path("home/", home),
+    path("home/", home, name='home'),
 ]
 
 urlpatterns += static(settings.MEDIA_URL,
