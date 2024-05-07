@@ -35,6 +35,7 @@ class Article(models.Model):
     def get_absolute_url(self):
         return reverse('wiki:wiki_article_detail', kwargs={'pk': (self.pk)})
 
+
 class Comment(models.Model):
     author = models.ForeignKey(
         Profile, on_delete=models.SET_NULL, null=True, blank=True)

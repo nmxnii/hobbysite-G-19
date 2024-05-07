@@ -15,27 +15,29 @@ from .forms import *
 
 #     return render(request, "wiki_article_list.html", ctx)
 
+
 class WikiArticleView(ListView):
     model = Article
     template_name = "wiki_article_list.html"
 
     def get_context_data(self, **kwargs):
-        ctx=super().get_context_data(**kwargs)
+        ctx = super().get_context_data(**kwargs)
         ctx["categories"] = ArticleCategory.objects.all()
         return ctx
+
 
 class WikiDetailView(DetailView):
     model = Article
     template_name = "wiki_article_detail.html"
 
     def get_context_data(self, **kwargs):
-        ctx=super().get_context_data(**kwargs)
+        ctx = super().get_context_data(**kwargs)
         ctx["object_list"] = Article.objects.all()
         article = self.get_object()
         ctx["comment_form"] = CommentForm()
         ctx["comments"] = article.comment_set.all()
         return ctx
-    
+
     def post(self, request, *args, **kwargs):
         article = self.get_object()
         comment_form = CommentForm(request.POST)
@@ -48,6 +50,7 @@ class WikiDetailView(DetailView):
         else:
             return self.render_to_response(self.get_context_data(comment_form=comment_form))
 
+
 class WikiCreateView(CreateView):
     model = Article
     template_name = "wiki_article_create.html"
@@ -55,10 +58,11 @@ class WikiCreateView(CreateView):
 
     def get_success_url(self):
         return reverse_lazy("wiki:wiki_article_list")
-    
+
     def form_valid(self, form):
-        form.instance.author = self.request.user.profile 
+        form.instance.author = self.request.user.profile
         return super().form_valid(form)
+
 
 class WikiUpdateView(UpdateView):
     model = Article
@@ -67,7 +71,7 @@ class WikiUpdateView(UpdateView):
 
     def get_success_url(self):
         return reverse_lazy("wiki:wiki_article_list")
-    
+
     def form_valid(self, form):
-        form.instance.author = self.request.user.profile 
+        form.instance.author = self.request.user.profile
         return super().form_valid(form)
