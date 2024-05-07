@@ -22,6 +22,10 @@
         color: #ff77c4; 
     }
     
+    h3 {
+        font-size: 1.5rem; 
+        color: #ff77c4; 
+    }
 
     a {
         text-decoration: none;
@@ -52,14 +56,34 @@
 <h1>
     <a href="/wiki/articles">WIKI </a>
 </h1>
-<h2>List of Articles</h2>
+<h2>Your Articles</h2>
 <ul>
-    {% for article in object_list %}
-        <li>
-            <a href="{{ article.get_absolute_url }}">
-                {{ article }}
-            </a>
-        </li>
+            {% for article in object_list %}
+            {% if article.author.pk == user.pk %}
+                    <li>
+                        <a href="{{ article.get_absolute_url }}">
+                            {{ article }}
+                        </a>
+                    </li>
+                    {% endif %}
+            {% endfor %}
+</ul>
+<h2>All Articles</h2>
+<ul>
+    {% for category in categories %}
+        <h3>{{category.name}}</h3>
+            {% for article in object_list %}
+                {% if article.author.pk != user.pk %}
+                {% if article.category == category %}
+                        <li>
+                            <a href="{{ article.get_absolute_url }}">
+                                {{ article }}
+                            </a>
+                        </li>
+                {% endif %}
+                {% endif %}
+        {% endfor %}
     {% endfor %}
 </ul>
+<a href='/wiki/article/add'><h2>Create Article</h2></a>
 {% endblock content %}
