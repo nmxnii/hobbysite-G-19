@@ -63,9 +63,38 @@
     <a href="/wiki/articles">WIKI </a>
 </h1>
 <h2>Article Title: {{ article.title }}</h2>
+<img src="{{ article.article_image.url }}" alt="test">
+<p id="entry">Author: {{article.author}}</p>
 <p>Category: {{ article.category }}</p>
 <p>Category Description: {{ article.category.description }}</p>
 <p id="entry">Article Entry: {{ article.entry }}</p>
 <p id="date">Created on: {{ article.created_on }}</p>
 <p id="date">Updated on: {{ article.updated_on }}</p>
+{% if article.author.pk == user.pk %}
+<h2><a href = "/wiki/article/{{ article.pk }}/edit">Update Article</a></h2>
+{% endif %}
+{% for others in object_list %}
+    {% if article.category == others.category and article.title != others.title %}
+        <li>
+            <a href="{{ others.get_absolute_url }}">
+                {{ others }}
+            </a>
+        </li>
+    {% endif %}
+{% endfor %}
+
+<h2>Add Comment</h2>
+<form method="POST">
+    {% csrf_token %}
+    {{comment_form.as_p}}
+    <button type="submit">Submit</button>
+</form>
+
+<h2>Comments</h2>
+<ul>
+    {% for comment in comments %}
+    <li>{{ comment.author.username}}: {{comment.entry}}</li>
+    {% endfor %}
+</ul>
+
 {% endblock content %}
