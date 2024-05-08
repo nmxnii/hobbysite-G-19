@@ -62,50 +62,32 @@
 </style>
 {% endblock styles %}
 {%block header%}
-<h1>Merchandise Store Details!</h1>
+<h1>Transactions!</h1>
 {%endblock header%}
-
 {%block content%}
-<h2>{{object.name }} </h2>
-<br>Owner: {{object.Owner}}
-
-<br>Price: {{object.price}} Pesos
-<br>Description: {{ object.description }}
-<br>
-<br><b>Stock: {{object.stock}}
-<br>Status: {{object.status}}</b>
-<br>
-
-
- 
-
-{% if object.Owner != request.user.profile %}    
-    <form method="post" action="" enctype= multipart/form-data>
-    {% csrf_token %}
-    {{ transaction_form.as_p }}
+{% if request.user.is_authenticated %}
+    <h1>Product Transactions:</h1>
+    {% for buyer in buyerAll %}
+    {% if buyer.user != request.user %}
+        
+            <h3>Purchased by: {{buyer.user}}</h3>
+                {% for product in itemsSold %}
+                    {% if product.transaction.buyer == buyer %}
+                    
+                        <br>Product: {{product.product.name}}
+                        <br>Amount: {{product.amount}}
+                        <br>Transaction On: {{product.createdOn}}
+                        <br>Status: {{product.status}}
+                        <br>
+                    
+                    {% endif %}
+                {% endfor%}
+            
+        
+    {% endif %}
+{% endfor %}
     
-{% endif %}
-{%if errors.OverBuy%}
-    <br>This transaction is <b>invalid</b> kindly input an amount thats <b>within</b> the stock.
 {%endif%}
-{% if object.Owner != request.user.profile and object.stock  != 0 %}    
-    <!-- <a href="{% url 'merchstore:product_cart_view' %}">Purchase</a> -->
-    <br><button type="submit">Purchase</button>
-{% endif %}
-{% if object.Owner != request.user.profile and object.stock  == 0 %}
-    <button disabled>Purchase</button>
-    <br>This product is currently Out of Stock!
-{% endif %}
-</form>
-
-
-{% if object.Owner  == request.user.profile %}
-   <br> <a href= "{% url 'merchstore:product_update' pk=object.pk %}" > Update this Product Here!</a>
-{% endif %} 
-
-
-
-
-
 <h5><a href="/merchstore/items"> Return to Homepage </a></h5>
+
 {%endblock content%}

@@ -58,54 +58,44 @@
     p{
         margin: 0
     }
+
+    .button1 {
+        background-color: #FF9913;
+        border: none;
+        color: white;
+        padding: 10px 20px;
+        text-align: center;
+        text-decoration: none;
+        display: inline-block;
+        font-size: 16px;
+        margin: 4px 2px;
+        cursor: pointer;
+        border-radius: 4px;
+        -webkit-transition-duration: 0.4s; /* Safari */
+        transition-duration: 0.4s;
+        opacity: 0.6;
+    }
+
+    .button1:hover {
+        box-shadow: 0 12px 16px 0 rgba(0,0,0,0.24),0 17px 50px 0 rgba(0,0,0,0.19);
+        opacity: 1
+    }
+    p.thick {
+        font-weight: bold;
+    }
+
     
 </style>
 {% endblock styles %}
 {%block header%}
-<h1>Merchandise Store Details!</h1>
+<h1>Create a Product!</h1>
 {%endblock header%}
-
 {%block content%}
-<h2>{{object.name }} </h2>
-<br>Owner: {{object.Owner}}
 
-<br>Price: {{object.price}} Pesos
-<br>Description: {{ object.description }}
-<br>
-<br><b>Stock: {{object.stock}}
-<br>Status: {{object.status}}</b>
-<br>
-
-
- 
-
-{% if object.Owner != request.user.profile %}    
-    <form method="post" action="" enctype= multipart/form-data>
+<br><form method="POST">
     {% csrf_token %}
-    {{ transaction_form.as_p }}
-    
-{% endif %}
-{%if errors.OverBuy%}
-    <br>This transaction is <b>invalid</b> kindly input an amount thats <b>within</b> the stock.
-{%endif%}
-{% if object.Owner != request.user.profile and object.stock  != 0 %}    
-    <!-- <a href="{% url 'merchstore:product_cart_view' %}">Purchase</a> -->
-    <br><button type="submit">Purchase</button>
-{% endif %}
-{% if object.Owner != request.user.profile and object.stock  == 0 %}
-    <button disabled>Purchase</button>
-    <br>This product is currently Out of Stock!
-{% endif %}
+    {{ form }}
+    <br><button type="submit" class= "button button1"> <p class="thick">Create</p></button>
 </form>
-
-
-{% if object.Owner  == request.user.profile %}
-   <br> <a href= "{% url 'merchstore:product_update' pk=object.pk %}" > Update this Product Here!</a>
-{% endif %} 
-
-
-
-
-
 <h5><a href="/merchstore/items"> Return to Homepage </a></h5>
 {%endblock content%}
