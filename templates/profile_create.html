@@ -1,8 +1,29 @@
 {% extends "base.html" %} 
 {% load static %} 
+<style>
+nav {
+    font-size: 20px;
+    margin: 8px 0;
+    display: flex;
+    justify-content: center;
+    background-color: #CCCCCC;
+  }
+  
+  nav a {
+    padding: 10px 20px;
+    margin: 0 10px;
+  }
+  
+  nav a:hover {
+    background-color: #ddd;
+    border-radius: 5px;
+  }
 
-
+</style>
 {% block content %}
+
+
+    <h1>creat profile first!</h1>
     <form method="POST" action="">
         {% csrf_token %} 
         {{ form }}
