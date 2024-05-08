@@ -1,0 +1,20 @@
+{% extends "base.html" %} 
+{% load static %} 
+
+
+{% block content %}
+
+    {% if user.profile == commission.author %}
+    <form method="POST" >
+        {% csrf_token %} 
+        {{ form.as_div }}
+        {{ job_formset }}
+
+        <button type="submit">Submit</button>
+    </form>
+    
+    {% else %}
+        <h2>ur not the author</h2>
+
+    {% endif %}
+{% endblock content %}

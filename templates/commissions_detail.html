@@ -1,89 +1,46 @@
 {% extends "base.html" %}
 {% load static %}
-{% block styles %}
-     <style>
-          body {
-               font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-               margin: 0;
-               padding: 0;
-               background-color: #f8f9fa; 
-               color: #333; 
-          }
 
-          h1 {
-          
-               text-align: center;
-               padding: 20px 0;
-               font-size: 2.5rem; 
-               color: #007bff; 
-          }
-          h2{
-               font-size: 20px
-          }
-          h3{
-               margin: 0.3
-          }
-          
-
-          a {
-               text-decoration: none;
-               color: #007bff; 
-               transition: color 0.3s ease; 
-          }
-
-          a:hover {
-               color: #0056b3; 
-          }
-
-          #content {
-               max-width: 800px;
-               margin: 20px auto; 
-               padding: 20px;
-               background-color: #fff; 
-               border-radius: 8px; 
-               box-shadow: 0 0 20px rgba(0, 0, 0, 0.1);
-          }
-          .time{
-               margin-top: 0px;
-               margin-bottom: 0px;
-               font-style: italic
-          }
-          .subtitles{
-               text-align: left;
-               margin-top: -16px;
-               margin-bottom: -16px;
-               font-weight: 100;
-          }
-          h4{
-               font-size: 20px;
-               margin-top:8px;
-               margin-bottom: 8px;
-          }
-          .content{
-               font-weight: 100;
-          }
-
-     </style>
-     {% endblock styles %}
-     {% block header %}
-          <h1>
-               <a href="/commissions/list">Home</a>
-          </h1>
-     {% endblock header %}
-
-
+{% comment %} {% block header %}
+     <h1>
+          <a href="/commissions/list">Home</a>
+     </h1>
+{% endblock header %} {% endcomment %}
 
 {% block content %}
      <h1 class="subtitles">Title: {{commission.title}}</h1>
-     <h2 class="content">{{commission.description}}</h1>
-     <p class="time"><small> People Required: {{commission.people_required}} </small></p>
+     <h2 class="content">Author: {{commission.author}}</h2>
+     <h2 class="content">{{commission.description}}</h2>
+
+     {% if user.profile == commission.author %} 
+     <h1><a href = "/commissions/{{commission.pk}}/edit">Update Commission</a></h1>
+     {% endif %}
+
      <p class="time"><small>  [created on: {{commission.created_on}}]</small></p>
      <p class="time"><small> [updated on: {{commission.updated_on}}]</small></p>
-     <h1 class = "subtitles"> Comments: </h1>
 
-     {% for comment in commission.comment_set.all  %}
-          <h4 class = "content">{{comment.entry }}</h4>
-          <p class="time"><small> [created on: {{comment.created_on}}] </small></p>
-          <p class="time"><small> [updated on: {{comment.updated_on}}] </small></p>
-     {% endfor %} 
+     <h2>JOBS NEEDED:</h2>
+     {% for job in commission.jobs.all %}
+          <h1> Job: {{ job.role }}</h1>
+          <h3> Entry: {{job.entry}}</h3>
+          <h3> Manpower Required:{{job.manpower_required}}</h3>
+          <h3>Status: {{job.status}}</h3>
+          <form method="POST">
+               {% csrf_token %}
+               {{ job_application_form }}
+               <input type="hidden" name="job_pk" value="{{job.pk}}">
+
+               <h2>{{job.applicants.all}}</h2>
+               {% if open_manpower != 0 %}
+                    <button name="apply">Apply to Job</button>  
+               {% else %}
+                    <button name="apply" disabled>Slots are full</button>  
+                    {% endif %}
+               
+
+          </form>
+     {% endfor %}
+     <h2>Open Manpower: {{ open_manpower}}</h2>
+     <h2>Total Manpower Required: {{ total_manpower }}</h2>
+     
 {% endblock content%}
