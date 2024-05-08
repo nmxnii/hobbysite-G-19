@@ -9,8 +9,11 @@
 {% block content %}
 
      <ul>
+      {% if object_list %}
+
         <h2>Open Commissions</h2>
           {% for commission in object_list %}
+
            <h2>
                 {% if commission.status == "open" %}
 
@@ -85,12 +88,12 @@
               {% endfor %}
           {% endfor %} 
           
-            {% comment %} {% empty %} {% endcomment %}
-            {% comment %} <h2>no commissions avaiable</h2> {% endcomment %}
         <h2 class="create"><a href="/commissions/add">Create a new commission</a></h2>
+      
+        {% else %}
+        <h1 class="create"><a href="/commissions/add">No Commissions yet. Create a new commission</a></h1>
 
-
-
+      {% endif %}
      </ul>
 
 {% endblock %}

@@ -1,11 +1,6 @@
 {% extends "base.html" %}
 {% load static %}
 
-{% comment %} {% block header %}
-     <h1>
-          <a href="/commissions/list">Home</a>
-     </h1>
-{% endblock header %} {% endcomment %}
 
 {% block content %}
      <h1 class="subtitles">Title: {{commission.title}}</h1>
@@ -22,15 +17,12 @@
      <h2>JOBS NEEDED:</h2>
      {% for job in commission.jobs.all %}
           <h1> Job: {{ job.role }}</h1>
-          <h3> Entry: {{job.entry}}</h3>
           <h3> Manpower Required:{{job.manpower_required}}</h3>
           <h3>Status: {{job.status}}</h3>
           <form method="POST">
                {% csrf_token %}
                {{ job_application_form }}
                <input type="hidden" name="job_pk" value="{{job.pk}}">
-
-               <h2>{{job.applicants.all}}</h2>
                {% if open_manpower != 0 %}
                     <button name="apply">Apply to Job</button>  
                {% else %}
