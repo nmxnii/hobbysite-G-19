@@ -38,7 +38,6 @@ class ProductDetailView(DetailView):
     def dispatch(self,request, *args, **kwargs):
         product=self.get_object()
         transactionInfo=request.session.get('transactionInfo')
-        
         if transactionInfo:
             if self.request.user.profile==product.Owner:
                 del request.session['transactionInfo']
@@ -46,9 +45,11 @@ class ProductDetailView(DetailView):
             buyer=self.request.user.profile
             amount=transactionInfo['amount']
             form=TransactionForm()
+            
             transaction=form.save(commit=False)
             transaction.product=product
             transaction.buyer=buyer
+            transaction.amount=amount
             product.stock=product.stock-amount
             transaction.status="On Cart"
             transaction.save()
@@ -93,31 +94,42 @@ class ProductDetailView(DetailView):
 
 class TransactionListView(LoginRequiredMixin, ListView):
     model=transaction
-    template_name = "transaction_list.html"
+    template_name = "product_transaction_list.html"
     def get_context_data(self, **kwargs):
         context=super().get_context_data(**kwargs)        
         user=Profile.objects.get(user=self.request.user)
         buyer=Profile.objects.all()
-        product=transaction.objects.filter(product__in=buyer)
-       
-
+        sellerItems=Product.objects.filter(Owner=user)
+        product=transaction.objects.filter(product__in=sellerItems)
+        totalProducts=0
+        
+        for total in product:
+            if total.amount != None:
+                totalProducts += total.amount
         context['itemsSold']=product
         context['buyerAll']=buyer
+        context['total']=totalProducts
         return context
 
 class CartView(LoginRequiredMixin, ListView):
     model=transaction
     template_name = "product_cart_view.html"
 
-    
 
     def get_context_data(self, **kwargs):
         context=super().get_context_data(**kwargs)        
         user=Profile.objects.get(user=self.request.user)
         product=transaction.objects.filter(buyer=user)
         seller=Profile.objects.all()
+        totalProducts=0
+        
+        for total in product:
+            if total.amount != None:
+                totalProducts += total.amount
         context['itemsBought']=product
         context['sellerAll']=seller
+        context['total']=totalProducts
+
         return context
 
 

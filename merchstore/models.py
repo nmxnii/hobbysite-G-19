@@ -30,7 +30,7 @@ class Product(models.Model):
     )
     description=models.TextField()
     price=models.DecimalField(max_digits=100, decimal_places=2)
-    stock=models.IntegerField(blank=True, null=True)
+    stock=models.PositiveIntegerField(blank=True, null=True)
     statusOptions=(
         ('Available','Available'),
         ('On Sale','On Sale'),
