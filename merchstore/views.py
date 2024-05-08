@@ -68,27 +68,31 @@ class ProductDetailView(DetailView):
         if form.is_valid():
             transaction = form.save(commit=False)
             amount=transaction.amount
-            if product.stock < transaction.amount:
-                    ctx["errors"]["OverBuy"]= True
-                    return render(request, self.template_name, context=ctx)
-            if request.user.is_authenticated:
-                buyer=self.request.user.profile
-                transaction.product=product
-                transaction.buyer=buyer
-                transaction.status="On Cart"
-                product.stock=product.stock-transaction.amount
-                if product.stock == 0:
-                   product.status = "Out of Stock"
-                
-                transaction.save()
-                product.save()
-                return redirect('merchstore:product_cart_view') 
-            else:
-                request.session['transactionInfo']={
-                    'amount':amount,
-                }
-                login_url=reverse('login')+'?next=' + request.get_full_path()
-                return redirect(login_url)
+            if (transaction.amount != None) and (transaction.amount != 0):
+                if product.stock < transaction.amount:
+                        ctx["errors"]["OverBuy"]= True
+                        return render(request, self.template_name, context=ctx)
+                if request.user.is_authenticated:
+                    buyer=self.request.user.profile
+                    transaction.product=product
+                    transaction.buyer=buyer
+                    transaction.amount=amount
+                    transaction.status="On Cart"
+                    product.stock=product.stock-transaction.amount
+                    if product.stock == 0:
+                        product.status = "Out of Stock"
+                    
+                    transaction.save()
+                    product.save()
+                    return redirect('merchstore:product_cart_view') 
+                else:
+                    request.session['transactionInfo']={
+                        'amount':amount,
+                    }
+                    login_url=reverse('login')+'?next=' + request.get_full_path()
+                    return redirect(login_url)
+            ctx["errors"]["NoAmount"]= True
+            return render(request, self.template_name, context=ctx)
         # return render(request, self.template_name, context=ctx)        
 
 

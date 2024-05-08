@@ -74,7 +74,7 @@
                 {% for transaction in itemsSold %}
                     {% if buyer.user.username == transaction.buyer.user.username %}
 
-                        <br>Product: {{transaction.product.product.name}}
+                        <br>Product: {{transaction.product.name}}
                         <br>Amount: {{transaction.amount}}
                         <br>Status: {{transaction.status}}
                         <br>Transaction On: {{transaction.createdOn}}
