@@ -15,14 +15,8 @@ class ProductForm(forms.ModelForm):
 class TransactionForm(forms.ModelForm):
     class Meta:
         model=transaction
-        # fields='__all__'
 
         exclude=['status', 'buyer','product']
-
-    # def __init__(self, *args, **kwargs):
-    #     super().__init__(*args, **kwargs)
-    #     self.fields['product'].disabled=True
-    #     self.fields['buyer'].disabled=True
 
 
 
