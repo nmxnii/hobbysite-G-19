@@ -68,25 +68,25 @@
 {% if request.user.is_authenticated %}
     <h1>Product Transactions:</h1>
     {% for buyer in buyerAll %}
-    {% if buyer.user != request.user %}
+        {% if buyer.user != request.user %}
         
             <h3>Purchased by: {{buyer.user}}</h3>
-                {% for product in itemsSold %}
-                    {% if product.transaction.buyer == buyer %}
-                    
-                        <br>Product: {{product.product.name}}
-                        <br>Amount: {{product.amount}}
-                        <br>Transaction On: {{product.createdOn}}
-                        <br>Status: {{product.status}}
+                {% for transaction in itemsSold %}
+                    {% if buyer.user.username == transaction.buyer.user.username %}
+
+                        <br>Product: {{transaction.product.product.name}}
+                        <br>Amount: {{transaction.amount}}
+                        <br>Status: {{transaction.status}}
+                        <br>Transaction On: {{transaction.createdOn}}
                         <br>
-                    
                     {% endif %}
+
                 {% endfor%}
             
         
     {% endif %}
 {% endfor %}
-    
+<br> <b>Number of products being transacted: {{total}}</b>
 {%endif%}
 <h5><a href="/merchstore/items"> Return to Homepage </a></h5>
 

@@ -72,12 +72,12 @@
 <br>Price: {{object.price}} Pesos
 <br>Description: {{ object.description }}
 <br>
-<br><b>Stock: {{object.stock}}
-<br>Status: {{object.status}}</b>
+<br><b>Stock: {{object.stock}}</b>
+    {% if object.stock < 5 and object.stock > 0  %}
+        <br><font size="-1">There is little stock left for this product!</font>
+    {% endif %} 
+<br><b>Status: {{object.status}}</b>
 <br>
-
-
- 
 
 {% if object.Owner != request.user.profile %}    
     <form method="post" action="" enctype= multipart/form-data>
@@ -89,7 +89,6 @@
     <br>This transaction is <b>invalid</b> kindly input an amount thats <b>within</b> the stock.
 {%endif%}
 {% if object.Owner != request.user.profile and object.stock  != 0 %}    
-    <!-- <a href="{% url 'merchstore:product_cart_view' %}">Purchase</a> -->
     <br><button type="submit">Purchase</button>
 {% endif %}
 {% if object.Owner != request.user.profile and object.stock  == 0 %}

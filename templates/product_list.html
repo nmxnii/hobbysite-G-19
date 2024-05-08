@@ -61,9 +61,10 @@
 
 {%endblock%}
 {% block content %}
-
+<a href= "/merchstore/cart" > Cart</a>
+<br><a href= "/merchstore/transactions" > Transactions</a>
     <ul>
-        <h2>Your Products &#9731; :</h2>
+        <h2>Your Products:</h2>
         {%for productType in object_list%}
         <p>  <font size="+1"><b>{{productType.name}}: </b></font>
         <br>{{productType.description}}
@@ -100,6 +101,8 @@
             {% endfor %}
         {%endfor%}
     </ul>
+
+
 
 <a href= "/merchstore/item/add" > Create a New Product Here!</a>
 {% endblock %}
