@@ -1,84 +1,32 @@
-{% extends 'base.html' %} {%load static%} {%block styles %}
-<style>
-  body {
-    font-family: "Segoe UI", Tahoma, Geneva, Verdana, sans-serif;
-    margin: 0;
-    padding: 0;
-    background-color: #f8f9fa;
-    color: #333;
-  }
-
-  h1 {
-    text-align: center;
-    padding: 20px 0;
-    font-size: 2.5rem;
-    color: #ff77c4;
-  }
-
-  h2 {
-    font-size: 2rem;
-    color: #ff77c4;
-  }
-
-  a {
-    text-decoration: none;
-    color: #ff77c4;
-    transition: color 0.3s ease;
-  }
-
-  a:hover {
-    color: #762151;
-  }
-
-  #content {
-    max-width: 800px;
-    margin: 1px auto;
-    padding: 20px;
-    background-color: #fff;
-    border-radius: 8px;
-    box-shadow: 0 0 20px rgba(0, 0, 0, 0.1);
-  }
-
-  p {
-    margin: 0;
-  }
-
-  #entry {
-    color: #ff77c4;
-    margin: 20;
-    padding: 20px;
-    font-size: 1.5rem;
-  }
-
-  #date {
-    font-style: italic;
-    font-size: 0.7rem;
-  }
-
-  img {
-    height: 300px;
-    object-fit: cover;
-  }
-</style>
-{% endblock styles %} 
-{% block content %}
-<h1>
-  <a href="/wiki/articles">WIKI </a>
-</h1>
-<p id="entry"><a href="/wiki/articles">Go Back to Articles</a></p>
-<h2>Article Title: {{ article.title }}</h2>
+{% extends 'base.html' %} {%load static%} {% block content %}
+<p class="text-center"><a href="/wiki/articles" class="btn btn-outline-info" role="button">Go Back to Articles</a></p>
+<h2 class="display-3 text-center">Article Title: {{ article.title }}</h2>
 {% if article.article_image %}
-<img src="{{ article.article_image.url }}" alt="" />
+<h2 class="text-center"><img src="{{ article.article_image.url }}" alt="" style="width: 200px; height: 200px;" /></h2>
 {% endif %}
-<p id="entry">Author: {{article.author}}</p>
-<p>Category: {{ article.category }}</p>
-<p>Category Description: {{ article.category.description }}</p>
-<p id="entry">Article Entry: {{ article.entry }}</p>
-<p id="date">Created on: {{ article.created_on }}</p>
-<p id="date">Updated on: {{ article.updated_on }}</p>
+<p class="text-center">Author: {{article.author}}</p>
+<p class="text-center">Category: {{ article.category }}</p>
+<p class="text-center">Category Description: {{ article.category.description }}</p>
+<p class="display-6">Article Entry: {{ article.entry }}</p>
+<p><small>Created on: {{ article.created_on }}</small></p>
+<p><small>Updated on: {{ article.updated_on }}</small></p>
 {% if article.author.pk == user.pk %}
-<h2><a href="/wiki/article/{{ article.pk }}/edit">Update Article</a></h2>
+<h2 class="text-center"><a class="btn btn-outline-info" role="button" href="/wiki/article/{{ article.pk }}/edit">Update Article</a></h2>
 {% endif %} 
+
+<h2 class="text-center">Add Comment</h2>
+<form class="text-center" method="POST">
+  {% csrf_token %} {{comment_form.as_p}}
+  <button type="submit" class="btn btn-outline-info" >Submit</button>
+</form>
+
+<h2 class="text-center">Comments</h2>
+<ul>
+  {% for comment in comments %}
+  <li class="text-center">{{ comment.author}}: {{comment.entry}}</li>
+  {% endfor %}
+</ul>
+
 <h2>Read More</h2>
 {% for others in object_list %} 
 {% if article.category == others.category and article.title != others.title %}
@@ -87,18 +35,4 @@
 </li>
 {% endif %} 
 {% endfor %}
-
-<h2>Add Comment</h2>
-<form method="POST">
-  {% csrf_token %} {{comment_form.as_p}}
-  <button type="submit">Submit</button>
-</form>
-
-<h2>Comments</h2>
-<ul>
-  {% for comment in comments %}
-  <li>{{ comment.author}}: {{comment.entry}}</li>
-  {% endfor %}
-</ul>
-
 {% endblock content %}

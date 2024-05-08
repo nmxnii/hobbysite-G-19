@@ -1,103 +1,34 @@
 <!DOCTYPE html>
 <html lang="en">
-  {% block styles %}
-  <style>
-
-      body {
-          font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-          margin: 0;
-          padding: 0;
-          background-color: #f8f9fa; 
-          color: #333; 
-      }
-
-      h1 {
-          text-align: center;
-          padding: 20px 0;
-          font-size: 2.5rem; 
-          color: #007bff; 
-      }
-      h2{
-          font-size: 24px
-      }
-      h3{
-          margin: 0.3
-      }
-      
-
-      a {
-          text-decoration: none;
-          color: #007bff; 
-          transition: color 0.3s ease; 
-          border-radius:100%;
-
-      }
-
-      a:hover {
-          color: #0056b3; 
-      }
-
-      #content {
-         max-width: 800px;
-         margin: 20px auto; 
-         padding: 10px;
-         background-color: #fff; 
-         border-radius: 8px; 
-         box-shadow: 0 0 20px rgba(0, 0, 0, 0.1);
-      }
-      p{
-          margin: 0
-      }
-      .create{
-          text-align: right;
-          margin-right: 20px;
-      }
-      nav {
-        font-size: 20px;
-        margin: 8px 0;
-        display: flex;
-        justify-content: center;
-        background-color: #CCCCCC;
-      }
-      
-      nav a {
-        padding: 10px 20px;
-        margin: 0 10px;
-      }
-      
-      nav a:hover {
-        background-color: #ddd;
-        border-radius: 5px;
-      }
-    
-  </style>
-    {% endblock styles %}  
-
 <head>
-    <nav>        
-        <a href="/home/">Home</a>
-        <a class="profile" href="{% url 'profile:profile-detail' request.user.pk %}" >Profile</a>
-        <a href="/blog/articles/">Blog</a>
-        <a href="/commissions/list/">Commissions</a>
-        <a href="/merchstore/items">Merchstore</a>
-        <a href="/wiki/articles/">Wiki</a>
-    </nav>
-    <title> </title>
-    <header>{% block header %}{%endblock%}</header>
-  </head>
-  <body>
-    
-    <div id="content">
-      {% if request.user.is_authenticated %} 
-        {% block content %}
-        {% endblock %}
-        <form action="{% url 'logout' %}" method="POST">
-            {% csrf_token %}
-            <button type="submit">LOG OUT</button>
-        </form> 
-        {% else %}
-        <h1>Please <a href={% url 'login' %}> --> login <-- first</a></h1>
-      {% endif %}
-    </div>
-  </body>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC" crossorigin="anonymous">
+  <title></title>
+</head>
+<body>
+  <div class="container my-5">
+    <nav class="nav nav-pills nav-fill">        
+      <a class="nav-link active" aria-current="page" href="/home/">Home</a>
+      <a class="nav-link active" aria-current="page" href="{% url 'profile:profile-detail' request.user.pk %}" >Profile</a>
+      <a class="nav-link active" aria-current="page" href="/blog/articles/">Blog</a>
+      <a class="nav-link active" aria-current="page" href="/commissions/list/">Commissions</a>
+      <a class="nav-link active" aria-current="page" href="/merchstore/items">Merchstore</a>
+      <a class="nav-link active" aria-current="page" href="/wiki/articles/">Wiki</a>
+  </nav>
+  <div id="content">
+    {% if request.user.is_authenticated %} 
+      {% block content %}
+      {% endblock %}
+      <form action="{% url 'logout' %}" method="POST">
+          {% csrf_token %}
+          <h2 class="text-center"><button type="submit" class="btn btn-outline-info">LOG OUT</button></h2>
+      </form> 
+      {% else %}
+      <h1><a class="btn btn-outline-info" href={% url 'login' %} role="button"> --> login <-- first</a></h1>
+    {% endif %}
+  </div>
+  </div>
+  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.bundle.min.js" integrity="sha384-MrcW6ZMFYlzcLA8Nl+NtUVF0sA7MsXsP1UyJoMp4YLEuNSfAP+JcXn/tWtIaxVXM" crossorigin="anonymous"></script>
+</body>
 </html>
