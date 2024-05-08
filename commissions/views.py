@@ -99,7 +99,6 @@ class CommissionCreateView(View):
                 job = Job()
                 cd = job_form.cleaned_data
                 job.commission = commission
-                job.entry = cd.get('entry')
                 job.role = cd.get('role')
                 job.manpower_required = cd.get('manpower_required')
                 job.status = cd.get('status')

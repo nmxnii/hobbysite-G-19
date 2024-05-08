@@ -32,9 +32,7 @@ class Job(models.Model):
 
     class Meta:
         ordering = ['-status', '-manpower_required', 'role']
-    entry = models.TextField()
-    created_on = models.DateTimeField(auto_now_add=True)
-    updated_on = models.DateTimeField(auto_now=True)
+
 
     def __str__(self):
         return 'Job ' + str(self.pk) + ": " + str(self.commission) + ': ' + self.role
