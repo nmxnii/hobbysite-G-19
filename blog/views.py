@@ -1,4 +1,5 @@
 from django.shortcuts import redirect
+from django.utils import timezone
 from django.views.generic.detail import DetailView
 from django.views.generic.list import ListView
 from django.views.generic.edit import CreateView
@@ -30,7 +31,7 @@ class BlogDetailView(DetailView):
         context = super().get_context_data(**kwargs)
         article = self.get_object()
         context['comment_form'] = CommentForm() 
-        context['comments'] = article.comment_set.all()  # Get all comments for the article
+        context['comments'] = article.comment_set.all() 
         return context
 
     def post(self, request, *args, **kwargs):
@@ -77,3 +78,4 @@ class ImageGalleryView(ListView):
         context = super().get_context_data(**kwargs)
         context['articles'] = Article.objects.all() 
         return context
+

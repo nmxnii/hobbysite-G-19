@@ -44,15 +44,41 @@
        border-radius: 8px;
        box-shadow: 0 0 20px rgba(0, 0, 0, 0.1);
    }
+
    p{
        margin: 0;
    }
+
+   .create{
+        text-align: right;
+        margin-right: 20px;
+    }
+
+    nav {
+        font-size: 20px;
+        margin: 8px 0;
+        display: flex;
+        justify-content: center;
+        background-color: #CCCCCC;
+    }
+
+    nav a {
+        padding: 10px 20px;
+        margin: 0 10px;
+    }
+
+    nav a:hover {
+        background-color: #ddd;
+        border-radius: 5px;
+    }
+
    #entry {
        color: #0077b6;
        margin: 20;
        padding: 20px;
        font-size: 1.5rem;
    }
+
    #date {
        font-style: italic;
        font-size: 0.7rem;
@@ -101,17 +127,18 @@
    </ul>
 
    <h3>Add a Comment</h3>
-    <form method="post">
-        {% csrf_token %}
-        {{ comment_form.as_p }}
-        <button type="submit">Submit</button>
-    </form>
+   <form method="post">
+       {% csrf_token %}
+       {{ comment_form.as_p }}
+       <button type="submit">Submit</button>
+   </form>
 
-    <h3>Comments</h3>
+   <h3>Comments</h3>
 <ul>
-    {% for comment in comments %}
-        <li>{{ comment.author.username }}: {{ comment.entry }}</li>
-    {% endfor %}
+   {% for comment in comments %}
+       <li> {{ comment.author }} said: {{ comment.entry }}</li>
+  
+   {% endfor %}
 </ul>
-   
+  
 {% endblock content %}
