@@ -13,7 +13,7 @@ class Commission(models.Model):
                                        ('completed', 'COMPLETED'), ('discontinued', 'DISCONTINUED')), default='open', max_length=255)
 
     class Meta:
-        ordering = ['-created_on']
+        ordering = ['created_on']
 
     def __str__(self):
         return self.title
