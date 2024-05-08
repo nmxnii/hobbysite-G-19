@@ -1,0 +1,123 @@
+{%extends 'base.html'%}
+{% block styles %}
+<style>
+    body {
+        text-align: center;
+        font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+        margin: 0;
+        padding: 0;
+        font-size: 20px; 
+        background-color: #FEE8D6; 
+        color: #555555; 
+    }
+
+    h1 {
+        text-align: center;
+        padding: 20px 0;
+        font-size: 40px; 
+        color: #FF9913; 
+        max-width: 400px;
+        margin: 20px auto; 
+        padding: 20px;
+        background-color: #fff; 
+        border-radius: 20px; 
+        box-shadow: 0 0 20px rgba(0, 0, 0, 0.1);
+    }
+
+    h2 {
+        text-align: center;
+        font-size: 30px; 
+        color: #FF9913; 
+    }
+    a {
+        text-decoration: none;
+        color: #FF9913; 
+        transition: color 0.3s ease; 
+    }
+
+    a:hover {
+        color: #555555; 
+        border: none;
+        color: black;
+        opacity: 0.6;
+        max-width: 800px;
+        margin: 50px auto; 
+        padding: 5px;
+        background-color: #FF9913; 
+        border-radius: 8px; 
+    }
+
+    #content {
+        max-width: 800px;
+        margin: 20px auto; 
+        padding: 20px;
+        background-color: #fff; 
+        border-radius: 8px; 
+        box-shadow: 0 0 20px rgba(0, 0, 0, 0.1);
+    }
+    p{
+        margin: 0
+    }
+
+    .button1 {
+        background-color: #FF9913;
+        border: none;
+        color: white;
+        padding: 10px 20px;
+        text-align: center;
+        text-decoration: none;
+        display: inline-block;
+        font-size: 16px;
+        margin: 4px 2px;
+        cursor: pointer;
+        border-radius: 4px;
+        -webkit-transition-duration: 0.4s; /* Safari */
+        transition-duration: 0.4s;
+        opacity: 0.6;
+    }
+
+    .button1:hover {
+        box-shadow: 0 12px 16px 0 rgba(0,0,0,0.24),0 17px 50px 0 rgba(0,0,0,0.19);
+        opacity: 1
+    }
+    p.thick {
+        font-weight: bold;
+    }
+
+    
+</style>
+{% endblock styles %}
+{%block header%}
+{%endblock header%}
+{%block content%}
+{% if request.user.is_authenticated %}
+    <h1>Your Cart!</h1>
+        {% for seller in sellerAll %}
+            {% if seller.user != request.user %}
+                
+                    <h3>Owned by: {{seller.user}}</h3>
+                        {% for product in itemsBought %}
+                            {% if product.product.Owner == seller %}
+                            
+                                <br>Product: {{product.product.name}}
+                                <br>Amount: {{product.amount}}
+                                <br>Transaction On: {{product.createdOn}}
+                                <br>Status: {{product.status}}
+                                <br>
+                            
+                            {% endif %}
+                        {% endfor%}
+                    
+                
+            {% endif %}
+        {% endfor %}
+    <br> <b>Number of products in your cart: {{total}}</b>
+{%endif%}
+
+
+
+
+    
+
+<h5><a href="/merchstore/items"> Return to Homepage </a></h5>
+{%endblock content%}

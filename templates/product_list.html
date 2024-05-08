@@ -61,18 +61,48 @@
 
 {%endblock%}
 {% block content %}
+<a href= "/merchstore/cart" > Cart</a>
+<br><a href= "/merchstore/transactions" > Transactions</a>
     <ul>
+        <h2>Your Products:</h2>
         {%for productType in object_list%}
-        <p>  <font size="+2"><b>{{productType.name}}: </b></font>
+        <p>  <font size="+1"><b>{{productType.name}}: </b></font>
         <br>{{productType.description}}
         </p>
+            
             {% for productT in productType.product.all %}
-            <ul>
-                <li>
-                    <a href= "{{ productT.get_absolute_url }}" > {{productT.name}} </a>
-                </li>
-            </ul>
+               
+                {% if productT.Owner  == request.user.profile %}
+                    
+                    <ul>
+                        <li>
+                            <a href= "{{ productT.get_absolute_url }}" > {{productT.name}} </a>
+                        </li>
+                    </ul>
+                {% endif %}
+            {% endfor %}
+        {%endfor%}
+        <h2>All Products:</h2>
+        {%for productType in object_list%}
+        <p>  <font size="+1"><b>{{productType.name}}: </b></font>
+        <br>{{productType.description}}
+        </p>
+            
+            {% for productT in productType.product.all %}
+               
+                {% if productT.Owner  != request.user.profile %}
+                    
+                    <ul>
+                        <li>
+                            <a href= "{{ productT.get_absolute_url }}" > {{productT.name}} </a>
+                        </li>
+                    </ul>
+                {% endif %}
             {% endfor %}
         {%endfor%}
     </ul>
+
+
+
+<a href= "/merchstore/item/add" > Create a New Product Here!</a>
 {% endblock %}

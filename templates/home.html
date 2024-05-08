@@ -80,13 +80,12 @@
 
 
 {% block content %}
-<h1><a href="{% url 'profile:profile-detail' request.user.pk %}">Welcome {{ request.user.profile.display_name }}</a></h1>
 
+{% if request.user.is_authenticated %}
+     <h1><a href="{% url 'profile:profile-detail' request.user.pk %}">Profile</a></h1>
+{% endif %}
 <h1>Welcome to our Hobby Site!</h1>
 <h2>Lists of Apps: </h2>
-
-
-
 
 <h2>
    <h2><a href="/merchstore/items/"> Merchandise Store</a>    </h2> 
