@@ -7,14 +7,6 @@ from django.views.generic.edit import CreateView, UpdateView
 from .models import *
 from .forms import *
 
-# def article_list(request):
-#     articles = Article.objects.all()
-#     categories = ArticleCategory.objects.all()
-
-#     ctx = {"articles": articles, "categories": categories}
-
-#     return render(request, "wiki_article_list.html", ctx)
-
 
 class WikiArticleView(ListView):
     model = Article
@@ -58,6 +50,16 @@ class WikiCreateView(CreateView):
 
     def get_success_url(self):
         return reverse_lazy("wiki:wiki_article_list")
+    
+    def get_initial(self):
+        initial = super().get_initial()
+        initial['author'] = self.request.user.profile
+        return initial
+    
+    def get_form(self, form_class=None):
+        form = super().get_form(form_class)
+        form.fields['author'].widget.attrs['disabled'] = True
+        return form
 
     def form_valid(self, form):
         form.instance.author = self.request.user.profile
@@ -67,7 +69,7 @@ class WikiCreateView(CreateView):
 class WikiUpdateView(UpdateView):
     model = Article
     template_name = "wiki_article_update.html"
-    form_class = ArticleForm
+    form_class = UpdateForm
 
     def get_success_url(self):
         return reverse_lazy("wiki:wiki_article_list")

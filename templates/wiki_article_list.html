@@ -47,33 +47,68 @@
   li {
     font-size: 1.5rem;
   }
+
+  #hover:hover {
+    transition: color 0.3s ease;
+    color: #762151;
+  }
+
+  .gallery {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
+    gap: 10px;
+    list-style: none;
+    padding: 0;
+    margin: 0;
+  }
+
+  .gallery img {
+    width: 100%;
+    height: auto;
+    border-radius: 8px;
+    box-shadow: 0 0 5px rgba(0, 0, 0, 0.3);
+    transition: transform 0.3s ease;
+  }
 </style>
-{% endblock styles %} {% block content %}
+{% endblock styles %} 
+{% block content %}
 <h1>
   <a href="/wiki/articles">WIKI </a>
 </h1>
 <h2>Your Articles</h2>
 <ul>
-  {% for article in object_list %} {% if article.author.pk == user.pk %}
+  <div class="gallery">
+  {% for article in object_list %} 
+  {% if article.author.pk == user.pk %}
   <li>
     <a href="{{ article.get_absolute_url }}"> {{ article }} </a>
+    {% if article.article_image %}
+    <img src="{{ article.article_image.url }}" alt="image not loading" />
+    {% endif %}
   </li>
-  {% endif %} {% endfor %}
+  {% endif %} 
+  {% endfor %}
+</div>
 </ul>
 <h2>All Articles</h2>
 <ul>
   {% for category in categories %}
   <h3>{{category.name}}</h3>
+  <div class="gallery">
   {% for article in object_list %} 
   {% if article.author.pk != user.pk %} 
   {% if article.category == category %}
   <li>
     <a href="{{ article.get_absolute_url }}"> {{ article }} </a>
+    {% if article.article_image %}
+    <img src="{{ article.article_image.url }}" alt="" />
+    {% endif %}
   </li>
   {% endif %} 
   {% endif %} 
   {% endfor %} 
+  </div>
   {% endfor %}
 </ul>
-<a href="/wiki/article/add"><h2>Create Article</h2></a>
+<a href="/wiki/article/add"><h2 id="hover">Create Article</h2></a>
 {% endblock content %}

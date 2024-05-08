@@ -4,8 +4,8 @@ from user_management.models import *
 
 
 class ArticleCategory(models.Model):
-    name = models.CharField(max_length=255, help_text="Enter Category Title")
-    description = models.TextField(help_text="Enter Category Description")
+    name = models.CharField(max_length=255)
+    description = models.TextField()
 
     class Meta:
         ordering = ['name']
@@ -16,15 +16,15 @@ class ArticleCategory(models.Model):
 
 
 class Article(models.Model):
-    title = models.CharField(max_length=255, help_text="Enter Article Title")
+    title = models.CharField(max_length=255)
     author = models.ForeignKey(
         Profile, on_delete=models.SET_NULL, null=True, blank=True, related_name='author')
     category = models.ForeignKey(
         ArticleCategory, on_delete=models.SET_NULL, null=True, blank=True)
-    entry = models.TextField(help_text="Enter Article Descrption")
+    entry = models.TextField()
     created_on = models.DateTimeField(auto_now_add=True)
     updated_on = models.DateTimeField(auto_now=True)
-    article_image = models.ImageField(upload_to="images/", null=True,)
+    article_image = models.ImageField(upload_to="images/", null=False, blank=False)
 
     class Meta:
         ordering = ['-created_on']
@@ -41,7 +41,7 @@ class Comment(models.Model):
         Profile, on_delete=models.SET_NULL, null=True, blank=True)
     article = models.ForeignKey(
         Article, on_delete=models.CASCADE)
-    entry = models.TextField(help_text="Enter Article Comment")
+    entry = models.TextField()
     created_on = models.DateTimeField(auto_now_add=True)
     updated_on = models.DateTimeField(auto_now=True)
 

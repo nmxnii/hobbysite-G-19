@@ -54,14 +54,22 @@
     font-style: italic;
     font-size: 0.7rem;
   }
+
+  img {
+    height: 300px;
+    object-fit: cover;
+  }
 </style>
 {% endblock styles %} 
 {% block content %}
 <h1>
   <a href="/wiki/articles">WIKI </a>
 </h1>
+<p id="entry"><a href="/wiki/articles">Go Back to Articles</a></p>
 <h2>Article Title: {{ article.title }}</h2>
-<img src="{{ article.article_image.url }}" alt="test" />
+{% if article.article_image %}
+<img src="{{ article.article_image.url }}" alt="" />
+{% endif %}
 <p id="entry">Author: {{article.author}}</p>
 <p>Category: {{ article.category }}</p>
 <p>Category Description: {{ article.category.description }}</p>
@@ -71,6 +79,7 @@
 {% if article.author.pk == user.pk %}
 <h2><a href="/wiki/article/{{ article.pk }}/edit">Update Article</a></h2>
 {% endif %} 
+<h2>Read More</h2>
 {% for others in object_list %} 
 {% if article.category == others.category and article.title != others.title %}
 <li>
@@ -88,7 +97,7 @@
 <h2>Comments</h2>
 <ul>
   {% for comment in comments %}
-  <li>{{ comment.author.username}}: {{comment.entry}}</li>
+  <li>{{ comment.author}}: {{comment.entry}}</li>
   {% endfor %}
 </ul>
 
