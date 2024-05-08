@@ -23,3 +23,4 @@ class JobApplicationForm(forms.ModelForm):
           model=JobApplication
           fields='__all__'
           exclude=['status', 'job', 'applicant']
+

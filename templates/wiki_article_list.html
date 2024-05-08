@@ -1,65 +1,114 @@
-{% extends 'base.html' %}
-{%load static%}
-{%block styles %}
+{% extends 'base.html' %} {%load static%} {%block styles %}
 <style>
-    body {
-        font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-        margin: 0;
-        padding: 0;
-        background-color: #f8f9fa; 
-        color: #333; 
-    }
+  body {
+    font-family: "Segoe UI", Tahoma, Geneva, Verdana, sans-serif;
+    margin: 0;
+    padding: 0;
+    background-color: #f8f9fa;
+    color: #333;
+  }
 
-    h1 {
-        text-align: center;
-        padding: 20px 0;
-        font-size: 2.5rem; 
-        color: #ff77c4; 
-    }
+  h1 {
+    text-align: center;
+    padding: 20px 0;
+    font-size: 2.5rem;
+    color: #ff77c4;
+  }
 
-    h2 {
-        font-size: 2rem; 
-        color: #ff77c4; 
-    }
-    
+  h2 {
+    font-size: 2rem;
+    color: #ff77c4;
+  }
 
-    a {
-        text-decoration: none;
-        color: #ff77c4; 
-        transition: color 0.3s ease; 
-    }
+  h3 {
+    font-size: 1.5rem;
+    color: #ff77c4;
+  }
 
-    a:hover {
-        color: #762151; 
-    }
+  a {
+    text-decoration: none;
+    color: #ff77c4;
+    transition: color 0.3s ease;
+  }
 
-    #content {
-        max-width: 800px;
-        margin: 1px auto; 
-        padding: 20px;
-        background-color: #fff; 
-        border-radius: 8px; 
-        box-shadow: 0 0 20px rgba(0, 0, 0, 0.1);
-    }
+  a:hover {
+    color: #762151;
+  }
 
-    li {
-        font-size: 1.5rem;
-    }
+  #content {
+    max-width: 800px;
+    margin: 1px auto;
+    padding: 20px;
+    background-color: #fff;
+    border-radius: 8px;
+    box-shadow: 0 0 20px rgba(0, 0, 0, 0.1);
+  }
 
+  li {
+    font-size: 1.5rem;
+  }
+
+  #hover:hover {
+    transition: color 0.3s ease;
+    color: #762151;
+  }
+
+  .gallery {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
+    gap: 10px;
+    list-style: none;
+    padding: 0;
+    margin: 0;
+  }
+
+  .gallery img {
+    width: 100%;
+    height: auto;
+    border-radius: 8px;
+    box-shadow: 0 0 5px rgba(0, 0, 0, 0.3);
+    transition: transform 0.3s ease;
+  }
 </style>
-{% endblock styles %}
+{% endblock styles %} 
 {% block content %}
 <h1>
-    <a href="/wiki/articles">WIKI </a>
+  <a href="/wiki/articles">WIKI </a>
 </h1>
-<h2>List of Articles</h2>
+<h2>Your Articles</h2>
 <ul>
-    {% for article in object_list %}
-        <li>
-            <a href="{{ article.get_absolute_url }}">
-                {{ article }}
-            </a>
-        </li>
-    {% endfor %}
+  <div class="gallery">
+  {% for article in object_list %} 
+  {% if article.author.pk == user.pk %}
+  <li>
+    <a href="{{ article.get_absolute_url }}"> {{ article }} </a>
+    {% if article.article_image %}
+    <img src="{{ article.article_image.url }}" alt="image not loading" />
+    {% endif %}
+  </li>
+  {% endif %} 
+  {% endfor %}
+</div>
 </ul>
+<h2>All Articles</h2>
+<ul>
+  {% for category in categories %}
+  <h3>{{category.name}}</h3>
+  <div class="gallery">
+  {% for article in object_list %} 
+  {% if article.author.pk != user.pk %} 
+  {% if article.category == category %}
+  <li>
+    <a href="{{ article.get_absolute_url }}"> {{ article }} </a>
+    {% if article.article_image %}
+    <img src="{{ article.article_image.url }}" alt="" />
+    {% endif %}
+  </li>
+  {% endif %} 
+  {% endif %} 
+  {% endfor %} 
+  </div>
+  {% endfor %}
+</ul>
+<a href="/wiki/article/add"><h2 id="hover">Create Article</h2></a>
 {% endblock content %}

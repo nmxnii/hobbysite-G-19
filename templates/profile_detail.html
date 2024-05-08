@@ -71,6 +71,8 @@
    </h1>
    <h2>Profile: {{ profile.display_name }}</h2>
    <h2>Email: {{ profile.email }}</h2>
-
+   {% if user.pk == profile.user.pk %}
+   <a href="/profile/{{profile.pk}}/update"><h2>Update your profile</h2></a>
+   {% endif %}
 
 {% endblock content %}
