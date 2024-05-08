@@ -10,7 +10,37 @@
 
      <ul>
       {% if object_list %}
+      <h2>Created Commissions</h2>
+      {% for commission in object_list %}
+      <h2>
+        {% if commission.author.pk == user.pk %}
+       <a href="{{commission.get_absolute_url}}">
+            {{commission.title}}
+       </a>
+       {% endif %}
+        </h2>
+      {% endfor %}
 
+      <h2>Commissions you applied to:</h2>
+
+      
+
+     {% for commission in object_list %}
+          {% for job in commission.jobs.all %}
+              {% for application in job.applicants.all %}
+                  {% if application.applicant == user.profile %}
+                      <h2>
+                          <a href="{{ commission.get_absolute_url }}">
+                              {{ commission.title }}: {{job.role}}
+                          </a>
+                      </h2>
+                  {% endif %}
+              {% endfor %}
+          {% endfor %}
+      {% endfor %} 
+
+
+      <h1>All commissions:</h1>
         <h2>Open Commissions</h2>
           {% for commission in object_list %}
 
@@ -59,34 +89,7 @@
           {% endfor %}
 
         
-        <h2>Created Commissions</h2>
-          {% for commission in object_list %}
-          <h2>
-            {% if commission.author.pk == user.pk %}
-           <a href="{{commission.get_absolute_url}}">
-                {{commission.title}}
-           </a>
-           {% endif %}
-            </h2>
-          {% endfor %}
-
-          <h2>Commissions you applied to:</h2>
-
-          
-    
-         {% for commission in object_list %}
-              {% for job in commission.jobs.all %}
-                  {% for application in job.applicants.all %}
-                      {% if application.applicant == user.profile %}
-                          <h2>
-                              <a href="{{ commission.get_absolute_url }}">
-                                  {{ commission.title }}: {{job.role}}
-                              </a>
-                          </h2>
-                      {% endif %}
-                  {% endfor %}
-              {% endfor %}
-          {% endfor %} 
+        
           
         <h2 class="create"><a href="/commissions/add">Create a new commission</a></h2>
       
