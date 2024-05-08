@@ -1,5 +1,7 @@
 from django.views.generic.edit import UpdateView, CreateView
 from django.views.generic.detail import DetailView
+from django.views.generic import TemplateView, View
+from django.http import HttpResponseRedirect
 from django.urls import reverse_lazy
 from .models import Profile
 from .forms import *
@@ -26,7 +28,5 @@ class ProfileCreateView(CreateView):
     template_name = 'profile_create.html'
 
     def get_success_url(self) -> str:
-        return reverse_lazy("profile:profile-detail", kwargs={"pk": self.object.pk})
+        return reverse('home')
 
-
-# Create your views here.

@@ -41,8 +41,36 @@
         border-radius: 8px; 
         box-shadow: 0 0 20px rgba(0, 0, 0, 0.1);
     }
+
     li {
         font-size: 1.5rem;
+    }
+
+    p{
+        margin: 0;
+    }
+ 
+    .create{
+        text-align: right;
+        margin-right: 20px;
+     }
+ 
+    nav {
+        font-size: 20px;
+        margin: 8px 0;
+        display: flex;
+        justify-content: center;
+        background-color: #CCCCCC;
+    }
+ 
+    nav a {
+        padding: 10px 20px;
+        margin: 0 10px;
+    }
+ 
+    nav a:hover {
+        background-color: #ddd;
+        border-radius: 5px;
     }
 
 </style>
@@ -50,16 +78,31 @@
 
 {% block content %}
 <h1>
-    <a href="/wiki/articles">BLOG </a>
+    <a href="/blog/articles">BLOG </a>
 </h1>
-    <h2>List of Articles</h2>
-    <ul>
-        {% for article in object_list %}
+<ul>
+    <h4><a href="/home">  &larr; Return to Homepage </a></h>
+    <h2> Your Articles </h2>
+    <h4> <a href="{% url 'blog:blog_gallery_view' %}">Switch to Gallery View</a> </h4>
+    {% for article in object_list %}
+        {% if article.author == request.user.profile %}
             <li>
-                <a href="{{ article.get_absolute_url }}">
-                    {{ article }}
-                </a>
+                <a href="{{ article.get_absolute_url }}">{{ article.title }}</a>
             </li>
-        {% endfor %}
-    </ul>
+        {% endif %}
+    {% endfor %}
+    <h2> All Articles </h2>
+    {% for category in article_category %}
+    <h3> {{ category }} </h3>
+    {% for article in object_list %}
+        {% if article.category.id == category.id and article.author != request.user.profile %}
+            <li>
+                <a href="{{ article.get_absolute_url }}">{{ article.title }} </a>
+            </li>
+        {% endif %}
+    {% endfor %}
+{% endfor %}
+</ul>
+<h4> <a href="{% url 'blog:article_create' %}">Add Article</a> </h4>
 {% endblock content %}
+

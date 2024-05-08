@@ -13,5 +13,6 @@ class ArticleCategoryAdmin(admin.ModelAdmin):
     model = ArticleCategory
     search_fields = ('name',)
 
+
 admin.site.register(Article, ArticleAdmin)
 admin.site.register(ArticleCategory, ArticleCategoryAdmin)
