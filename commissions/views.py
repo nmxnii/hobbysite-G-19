@@ -117,7 +117,6 @@ class CommissionCreateView(View):
 class CommissionUpdateView(UpdateView):
     model = Commission
     template_name = 'commissions_update.html'
-    # Add all fields except 'created_on' and 'updated_on'
     fields = ['title', 'description', 'status']
 
     def get_context_data(self, **kwargs):
@@ -144,6 +143,7 @@ class CommissionUpdateView(UpdateView):
 
             if all(job.status == 'full' for job in self.object.jobs.all()):
                 self.object.status = 'full'
+                self.object.save()
             return HttpResponseRedirect(reverse('commissions:commissions'))
         else:
             print('not valid')
