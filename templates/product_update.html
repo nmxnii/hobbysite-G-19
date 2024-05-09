@@ -1,77 +1,13 @@
 {% extends 'base.html' %}
-{% block styles %}
-    <style>
-    body {
-        text-align: center;
-        font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-        margin: 0;
-        padding: 0;
-        font-size: 20px; 
-        background-color: #FEE8D6; 
-        color: #555555; 
-    }
-
-    h1 {
-        text-align: center;
-        padding: 20px 0;
-        font-size: 40px; 
-        color: #FF9913; 
-        max-width: 400px;
-        margin: 20px auto; 
-        padding: 20px;
-        background-color: #fff; 
-        border-radius: 20px; 
-        box-shadow: 0 0 20px rgba(0, 0, 0, 0.1);
-    }
-
-    h2 {
-        text-align: center;
-        font-size: 30px; 
-        color: #FF9913; 
-    }
-    a {
-        text-decoration: none;
-        color: #FF9913; 
-        transition: color 0.3s ease; 
-    }
-
-    a:hover {
-        color: #555555; 
-        border: none;
-        color: black;
-        opacity: 0.6;
-        max-width: 800px;
-        margin: 50px auto; 
-        padding: 5px;
-        background-color: #FF9913; 
-        border-radius: 8px; 
-    }
-
-    #content {
-        max-width: 800px;
-        margin: 20px auto; 
-        padding: 20px;
-        background-color: #fff; 
-        border-radius: 8px; 
-        box-shadow: 0 0 20px rgba(0, 0, 0, 0.1);
-    }
-    p{
-        margin: 0
-    }
-    
-    </style>
-{% endblock styles %}
-{% block header %}
-    <h1>Update a Product!</h1>
-{% endblock header %}
 {% block content %}
+    <h5>
+        <a class="btn btn-outline-info" role="button" href="/home">&larr; Return to Homepage</a>
+    </h5>
+    <h1 class="display-3 text-center">Update a Product!</h1>
     <p>Owner: {{ request.user.profile }}</p>
     <form method="POST">
         {% csrf_token %}
         {{ form }}
         <button type="submit">Update</button>
     </form>
-    <h5>
-        <a href="/merchstore/items">Return to Homepage</a>
-    </h5>
 {% endblock content %}
