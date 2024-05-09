@@ -85,9 +85,11 @@
 
         
         
-          
+     {% if request.user.is_authenticated %}
+  
         <h2 class="text-center"><a class="btn btn-outline-info" role="button" href="/commissions/add">Create a new commission</a></h2>
-      
+        {% endif %}
+    
         {% else %}
         <h1 class="text-center"><a href="/commissions/add" class="btn btn-outline-info btn-lg" role="button">No Commissions yet. Create a new commission</a></h1>
 
