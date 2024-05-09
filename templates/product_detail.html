@@ -3,7 +3,7 @@
     <h5>
         <a class="btn btn-outline-info" role="button" href="/home">&larr; Return to Homepage</a>
     </h5>
-    <h1>Merchandise Store Details!</h1>
+    <h1 class="text-center display-3">Merchandise Store Details!</h1>
     <h2>{{ object.name }}</h2>
     <br>
     Owner: {{ object.Owner }}
@@ -46,6 +46,7 @@
     </form>
     {% if object.Owner  == request.user.profile %}
         <br>
-        <a href= "{% url 'merchstore:product_update' pk=object.pk %}">Update this Product Here!</a>
+        <h2 class="text-center">
+        <a class="btn btn-outline-info" role="button" href= "{% url 'merchstore:product_update' pk=object.pk %}">Update this Product Here!</a></h2>
     {% endif %}
 {% endblock content %}

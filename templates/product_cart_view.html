@@ -4,7 +4,7 @@
         <a class="btn btn-outline-info" role="button" href="/home">&larr; Return to Homepage</a></h>
         </h5>
         {% if request.user.is_authenticated %}
-            <h1>Your Cart!</h1>
+            <h1 class="text-center display-3">Your Cart!</h1>
             {% for seller in sellerAll %}
                 {% if seller.user != request.user %}
                     <h3>Owned by: {{ seller.user }}</h3>
