@@ -20,7 +20,7 @@ from django.urls import path, include
 from django.conf import settings
 from django.conf.urls.static import static
 
-from .views import home
+from .views import home, dashboard
 
 
 urlpatterns = [
@@ -33,6 +33,7 @@ urlpatterns = [
     path("accounts/", include("accounts.urls")),    
     path("profile/", include("user_management.urls", namespace="profile")),
     path("home/", home, name='home'),
+    path("dashboard/", dashboard, name='dashboard_view'),
 ]
 
 urlpatterns += static(settings.MEDIA_URL,
