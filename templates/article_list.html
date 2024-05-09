@@ -1,7 +1,7 @@
 {% extends 'base.html' %}
 {%load static%}{% block content %}
 <ul>
-    <h4 class="text-center"><a class="btn btn-outline-info" role="button" href="/home">  &larr; Return to Homepage </a></h>
+    <h4><a class="btn btn-outline-info" role="button" href="/home">  &larr; Return to Homepage </a></h>
         <h4 class="text-center"> <a class="btn btn-outline-info" role="button" href="{% url 'blog:blog_gallery_view' %}">Switch to Gallery View</a> </h4>
         {% if request.user.is_authenticated %}
         <h2 class="display-3 text-center"> Your Articles </h2>

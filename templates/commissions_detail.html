@@ -4,8 +4,8 @@
 
 {% block content %}
      <h1 class="display-3 text-center">Title: {{commission.title}}</h1>
-     <h2 class="lead content text-center">Author: {{commission.author}}</h2>
-     <h2 class="content">{{commission.description}}</h2>
+     <h2 class="h3 text-center">Author: {{commission.author}}</h2>
+     <h2 class="content display-6">{{commission.description}}</h2>
 
      {% if user.profile == commission.author %} 
      <h1 class="text-center"><a class="btn btn-outline-info" role= "button" href = "/commissions/{{commission.pk}}/edit">Update Commission</a></h1>
@@ -15,11 +15,11 @@
      <p class="time"><small> [updated on: {{commission.updated_on}}]</small></p>
 
      <h2 class="text-center">
-     <h2 class="text-center">JOBS NEEDED:</h2>
+     <h2 class="display-3 text-center">Jobs Needed:</h2>
      {% for job in commission.jobs.all %}
-          <h1 class="text-center"> Job: {{ job.role }}</h1>
-          <h3 class="text-center"> Manpower Required:{{job.manpower_required}}</h3>
-          <h3 class="text-center">Status: {{job.status}}</h3>
+          <h1 class=""> Job: {{ job.role }}</h1>
+          <h3 class="lead"> Manpower Required:{{job.manpower_required}}</h3>
+          <h3 class="lead">Status: {{job.status}}</h3>
           {% if request.user.is_authenticated %}
 
                <form method="POST">
@@ -27,9 +27,9 @@
                     {{ job_application_form }}
                     <input type="hidden" name="job_pk" value="{{job.pk}}">
                     {% if open_manpower != 0 %}
-                         <h2 class= "text-center"><button class="btn btn-outline-info" name="apply">Apply to Job</button>  </h2>
+                         <h2 class= ""><button class="btn btn-outline-info" name="apply">Apply to Job</button>  </h2>
                     {% else %}
-                    <h2 class= "text-center"><button class="btn btn-outline-info" name="apply" disabled>Slots are full</button>  </h2>
+                    <h2 class= ""><button class="btn btn-outline-info" name="apply" disabled>Slots are full</button>  </h2>
                          {% endif %}
                     
 
@@ -37,7 +37,7 @@
                
           {% endif %}
      {% endfor %}
-     <h2 class="text-center">Open Manpower: {{ open_manpower}}</h2>
-     <h2 class="text-center">Total Manpower Required: {{ total_manpower }}</h2>
+     <h2 class="h3">Open Manpower: {{ open_manpower}}</h2>
+     <h2 class="h3">Total Manpower Required: {{ total_manpower }}</h2>
 </h2>
 {% endblock content%}

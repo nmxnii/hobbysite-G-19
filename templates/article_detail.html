@@ -14,13 +14,13 @@
         
     {% endif %}
 
-   <h2 class="text-center">Article Title: {{ article.title }}</h2>
+   <h2 class="display-3 text-center">Article Title: {{ article.title }}</h2>
    <h3 class="text-center">Author: {{ article.author }} </h3>
    <p class="text-center">Category: {{ article.category}}</p>
    <p class="text-center">Category Description: {{ article.category.description }}</p>
-   <p class="text-center">Article Entry: {{article.entry}}</p>
-   <p class="text-center">Created on: {{ article.created_on }}</p>
-   <p class="text-center">Updated on: {{ article.updated_on }}</p>
+   <p class="text-center display-6">Article Entry: {{article.entry}}</p>
+   <p ><small>Created on: {{ article.created_on }}</small></p>
+   <p ><small>Updated on: {{ article.updated_on }}</small></p>
 
    <h2>Other Articles by {{ request.user.profile }}</h2>
    <ul>
@@ -35,7 +35,7 @@
    <form method="post">
        {% csrf_token %}
        {{ comment_form.as_p }}
-       <button type="submit">Submit</button>
+       <button type="submit" class="btn btn-outline-info">Submit</button>
    </form>
 {% endif %}
    <h3>Comments</h3>

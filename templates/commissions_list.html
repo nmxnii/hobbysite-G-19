@@ -7,7 +7,7 @@
           {% if object_list %}
                {% if request.user.is_authenticated %}
 
-                    <h2 class="text-center display-3">Created Commissions</h2>
+                    <h2 class="text-center display-4">Created Commissions</h2>
                {% for commission in object_list %}
                     <h2>
                     {% if commission.author.pk == user.pk %}
@@ -18,7 +18,7 @@
                     </h2>
                {% endfor %}
 
-               <h2 class="display-5">Commissions you applied to:</h2>
+               <h2 class="h3">Commissions you applied to:</h2>
                {% for commission in object_list %}
                     {% for job in commission.jobs.all %}
                          {% for application in job.applicants.all %}
@@ -35,8 +35,8 @@
           {% endif %}
 
 
-      <h1 class="text-center display-2">All commissions:</h1>
-        <h2 class="display-5">Open Commissions</h2>
+      <h1 class="text-center display-4">All commissions</h1>
+        <h2 class="h3">Open Commissions:</h2>
           {% for commission in object_list %}
 
            <h2>
@@ -49,7 +49,7 @@
            </h2>
           {% endfor %}
 
-          <h2 class="display-5"> Full Commissions </h2>
+          <h2 class="h3"> Full Commissions: </h2>
           {% for commission in object_list %}
           <h2>
             {% if commission.status == "full" %}
@@ -61,7 +61,7 @@
           {% endfor %}
         
 
-          <h2 class="display-5">Completed Commissions</h2>
+          <h2 class="h3">Completed Commissions:</h2>
           {% for commission in object_list %}
           <h2 >
             {% if commission.status == "completed" %}
@@ -72,7 +72,7 @@
             </h2>
           {% endfor %}
 
-          <h2 class="display-5">Discontinued Commissions</h2>
+          <h2 class="h3">Discontinued Commissions:</h2>
           {% for commission in object_list %}
           <h2>
             {% if commission.status == "discontinued" %}

@@ -1,19 +1,19 @@
 {% extends 'base.html' %} {%load static%} {% block content %}
-<p class="text-center"><a href="/wiki/articles" class="btn btn-outline-info" role="button">Go Back to Articles</a></p>
+<p><a href="/wiki/articles" class="btn btn-outline-info" role="button"> &larr; Go Back to Articles</a></p>
 <h2 class="display-3 text-center">Article Title: {{ article.title }}</h2>
+{% if article.author.pk == user.pk %}
+<h2 class="text-center"><a class="btn btn-outline-info" role="button" href="/wiki/article/{{ article.pk }}/edit">Update Article</a></h2>
+{% endif %} 
+{% if request.user.is_authenticated %}
 {% if article.article_image %}
 <h2 class="text-center"><img src="{{ article.article_image.url }}" alt="" style="width: 200px; height: 200px;" /></h2>
 {% endif %}
-<p class="text-center">Author: {{article.author}}</p>
+<p class="h3 text-center">Author: {{article.author}}</p>
 <p class="text-center">Category: {{ article.category }}</p>
 <p class="text-center">Category Description: {{ article.category.description }}</p>
 <p class="display-6">Article Entry: {{ article.entry }}</p>
 <p><small>Created on: {{ article.created_on }}</small></p>
 <p><small>Updated on: {{ article.updated_on }}</small></p>
-{% if article.author.pk == user.pk %}
-<h2 class="text-center"><a class="btn btn-outline-info" role="button" href="/wiki/article/{{ article.pk }}/edit">Update Article</a></h2>
-{% endif %} 
-{% if request.user.is_authenticated %}
 <h2>Add Comment</h2>
 <form method="POST">
   {% csrf_token %} {{comment_form.as_p}}
