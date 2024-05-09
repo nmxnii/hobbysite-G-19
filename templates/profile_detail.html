@@ -1,11 +1,15 @@
 {% extends 'base.html' %}
-{%load static%}
+{% load static %}
 {% block content %}
-       <a button type="submit" class="btn btn-outline-info" href="/home/"> &larr; Back to home </a>
-   <h2>Profile: {{ profile.display_name }}</h2>
-   <h2>Email: {{ profile.email }}</h2>
-   {% if user.pk == profile.user.pk %}
-   <h2 class="text-center"><a button type="submit" class="btn btn-outline-info" href="/profile/{{profile.pk}}/update">Update your profile</a></h2>
-   {% endif %}
-
+    <a button type="submit" class="btn btn-outline-info" href="/home/">&larr; Back to home</a>
+    <h2>Profile: {{ profile.display_name }}</h2>
+    <h2>Email: {{ profile.email }}</h2>
+    {% if user.pk == profile.user.pk %}
+        <h2 class="text-center">
+            <a button
+               type="submit"
+               class="btn btn-outline-info"
+               href="/profile/{{ profile.pk }}/update">Update your profile</a>
+        </h2>
+    {% endif %}
 {% endblock content %}

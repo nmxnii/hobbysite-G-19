@@ -1,7 +1,7 @@
 {% extends 'base.html' %}
-{%load static%}
-{%block styles %}
-<style>
+{% load static %}
+{% block styles %}
+    <style>
    body {
        font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
        margin: 0;
@@ -86,13 +86,15 @@
    }
 
 
-</style>
+    </style>
 {% endblock styles %}
 {% load static %}
-{% block title %}Add New Article{% endblock title %}
+{% block title %}
+    Add New Article
+{% endblock title %}
 {% block content %}
     <h2>Create Article</h2>
-    <h3> Author: {{ request.user.profile }} </h3>
+    <h3>Author: {{ request.user.profile }}</h3>
     <form method="POST" enctype="multipart/form-data">
         {% csrf_token %}
         {{ form.as_p }}

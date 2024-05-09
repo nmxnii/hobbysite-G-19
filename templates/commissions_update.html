@@ -1,31 +1,26 @@
-{% extends "base.html" %} 
-{% load static %} 
-
-
+{% extends "base.html" %}
+{% load static %}
 {% block content %}
-{% if request.user.is_authenticated %}
-
-    {% if user.profile == commission.author %}
-    <form method="POST" >
-        {% csrf_token %} 
-
-
-        <h2>Author: {{commission.author}} </h2>
-        {{ form.as_div }}
-        <p class="time"><small>  [created on: {{commission.created_on}}]</small></p>
-     <p class="time"><small> [updated on: {{commission.updated_on}}]</small></p>
-     <hr>
-        {{ job_formset }}
-
-        <button type="submit">Submit</button>
-    </form>
-    
+    {% if request.user.is_authenticated %}
+        {% if user.profile == commission.author %}
+            <form method="POST">
+                {% csrf_token %}
+                <h2>Author: {{ commission.author }}</h2>
+                {{ form.as_div }}
+                <p class="time">
+                    <small>[created on: {{ commission.created_on }}]</small>
+                </p>
+                <p class="time">
+                    <small>[updated on: {{ commission.updated_on }}]</small>
+                </p>
+                <hr>
+                {{ job_formset }}
+                <button type="submit">Submit</button>
+            </form>
+        {% else %}
+            <h2>ur not the author</h2>
+        {% endif %}
     {% else %}
-        <h2>ur not the author</h2>
-
+        <h1>Log-in first</h1>
     {% endif %}
-{% else %}
-    <h1>Log-in first</h1>
-{% endif %}
-
 {% endblock content %}

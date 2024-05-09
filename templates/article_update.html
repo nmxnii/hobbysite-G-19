@@ -1,7 +1,7 @@
 {% extends 'base.html' %}
-{%load static%}
-{%block styles %}
-<style>
+{% load static %}
+{% block styles %}
+    <style>
    body {
        font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
        margin: 0;
@@ -84,14 +84,13 @@
    }
 
 
-</style>
+    </style>
 {% endblock styles %}
-
 {% block content %}
-<h2>Update Article</h2>
-<form method="post">
-    {% csrf_token %}
-    {{ form.as_p }}
-    <button type="submit">Update</button>
-</form>
+    <h2>Update Article</h2>
+    <form method="post">
+        {% csrf_token %}
+        {{ form.as_p }}
+        <button type="submit">Update</button>
+    </form>
 {% endblock %}

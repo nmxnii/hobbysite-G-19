@@ -1,17 +1,32 @@
 {% extends 'base.html' %}
 {% load static %}
 {% block content %}
-<h4><a href="/home" class="btn btn-outline-info btn-lg" role="button"> &larr; Return to Homepage </a></h4>
-<h2 class="display-3 text-center"> Articles </h2>
-<h4 class="text-center"> <a href="{% url 'blog:article_list' %}" class="btn btn-outline-info btn-lg" role="button">Switch to List View</a> </h4>
-<div class="gallery-container">
-    {% for article in object_list %}
-        <div class="gallery-item">
-            <img src="{{ article.header_image.url }}" style="width: 200px; height: 200px;" alt="{{ article.title }}">
-            <a href="{{ article.get_absolute_url }}" class="btn btn-secondary btn-lg" role="button">{{ article.title }} </a>
-        </div>
-    {% endfor %}
-</div>
+    <h4>
+        <a href="/home" class="btn btn-outline-info btn-lg" role="button">&larr; Return to Homepage</a>
+    </h4>
+    <h2 class="display-3 text-center">Articles</h2>
+    <h4 class="text-center">
+        <a href="{% url 'blog:article_list' %}"
+           class="btn btn-outline-info btn-lg"
+           role="button">Switch to List View</a>
+    </h4>
+    <div class="gallery-container">
+        {% for article in object_list %}
+            <div class="gallery-item">
+                <img src="{{ article.header_image.url }}"
+                     style="width: 200px;
+                            height: 200px"
+                     alt="{{ article.title }}">
+                <a href="{{ article.get_absolute_url }}"
+                   class="btn btn-secondary btn-lg"
+                   role="button">{{ article.title }}</a>
+            </div>
+        {% endfor %}
+    </div>
 </ul>
-<h4 class="text-center"><a href="{% url 'blog:article_create' %}" class="btn btn-outline-info btn-lg" role="button">Add Article</a></h4>
+<h4 class="text-center">
+    <a href="{% url 'blog:article_create' %}"
+       class="btn btn-outline-info btn-lg"
+       role="button">Add Article</a>
+</h4>
 {% endblock content %}

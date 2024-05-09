@@ -1,32 +1,45 @@
 {% extends 'base.html' %}
-{%load static%}{% block content %}
-<ul>
-    <h4><a class="btn btn-outline-info" role="button" href="/home">  &larr; Return to Homepage </a></h>
-        <h4 class="text-center"> <a class="btn btn-outline-info" role="button" href="{% url 'blog:blog_gallery_view' %}">Switch to Gallery View</a> </h4>
-        {% if request.user.is_authenticated %}
-        <h2 class="display-3 text-center"> Your Articles </h2>
-    {% for article in object_list %}
-        {% if article.author == request.user.profile %}
-            <li>
-                <a href="{{ article.get_absolute_url }}" class="btn btn-secondary btn-lg" role="button">{{ article.title }}</a>
-            </li>
-        {% endif %}
-    {% endfor %}
-    {% endif %}
-    <h2 class="display-3 text-center"> All Articles </h2>
-    {% for category in article_category %}
-    <h3> {{ category }} </h3>
-    {% for article in object_list %}
-        {% if article.category.id == category.id and article.author != request.user.profile %}
-            <li>
-                <a href="{{ article.get_absolute_url }}" class="btn btn-secondary btn-lg" role="button">{{ article.title }} </a>
-            </li>
-        {% endif %}
-    {% endfor %}
-{% endfor %}
-</ul>
-{% if request.user.is_authenticated %}
-<h4 class="text-center"> <a class="btn btn-outline-info" role="button" href="{% url 'blog:article_create' %}">Add Article</a> </h4>
-{% endif %}
-{% endblock content %}
-
+{% load static %}
+{% block content %}
+    <ul>
+        <h4>
+            <a class="btn btn-outline-info" role="button" href="/home">&larr; Return to Homepage</a></h>
+                <h4 class="text-center">
+                    <a class="btn btn-outline-info"
+                       role="button"
+                       href="{% url 'blog:blog_gallery_view' %}">Switch to Gallery View</a>
+                </h4>
+                {% if request.user.is_authenticated %}
+                    <h2 class="text-start display-4">Your Articles</h2>
+                    {% for article in object_list %}
+                        {% if article.author == request.user.profile %}
+                            <li>
+                                <a href="{{ article.get_absolute_url }}"
+                                   class="btn btn-secondary btn-lg"
+                                   role="button">{{ article.title }}</a>
+                            </li>
+                        {% endif %}
+                    {% endfor %}
+                {% endif %}
+                <h2 class="text-start display-4">All Articles</h2>
+                {% for category in article_category %}
+                    <h3>{{ category }}</h3>
+                    {% for article in object_list %}
+                        {% if article.category.id == category.id and article.author != request.user.profile %}
+                            <li>
+                                <a href="{{ article.get_absolute_url }}"
+                                   class="btn btn-secondary btn-lg"
+                                   role="button">{{ article.title }}</a>
+                            </li>
+                        {% endif %}
+                    {% endfor %}
+                {% endfor %}
+            </ul>
+            {% if request.user.is_authenticated %}
+                <h4 class="text-center">
+                    <a class="btn btn-outline-info"
+                       role="button"
+                       href="{% url 'blog:article_create' %}">Add Article</a>
+                </h4>
+            {% endif %}
+        {% endblock content %}

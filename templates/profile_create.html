@@ -1,13 +1,10 @@
-{% extends "base.html" %} 
-{% load static %} 
+{% extends "base.html" %}
+{% load static %}
 {% block content %}
-
-
     <h1>Create a Profile!</h1>
     <form method="POST" action="">
-        {% csrf_token %} 
+        {% csrf_token %}
         {{ form }}
         <button type="submit">Submit</button>
     </form>
-
 {% endblock content %}

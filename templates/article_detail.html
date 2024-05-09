@@ -1,49 +1,61 @@
 {% extends 'base.html' %}
-{%load static%}
+{% load static %}
 {% block content %}
-   <h1 class="text-center">
-       <h4><a class="btn btn-outline-info" role="button" href="/blog/articles"> &larr; Return to Article List </a></h4>
-   </h1>
-   <div class='container'>
-   {% if article.header_image %}
-   <h2 class="text-center"><img src="{{ article.header_image.url }}" style="width: 200px; height: 200px;" alt="{{ article.title }} Header Image"></h2>
-   {% endif %}
-   </div>
-   {% if article.author == request.user.profile %}
-        <h2 class="text-center"><a href="{% url 'blog:article_update' pk=article.pk %}" class="btn btn-outline-info" role="button">Update Article</a></h2>
-        
+    <h1 class="text-center">
+        <h4>
+            <a class="btn btn-outline-info" role="button" href="/blog/articles">&larr; Return to Article List</a>
+        </h4>
+    </h1>
+    <div class='container'>
+        {% if article.header_image %}
+            <h2 class="text-center">
+                <img src="{{ article.header_image.url }}"
+                     style="width: 200px;
+                            height: 200px"
+                     alt="{{ article.title }} Header Image">
+            </h2>
+        {% endif %}
+    </div>
+    {% if article.author == request.user.profile %}
+        <h2 class="text-center">
+            <a href="{% url 'blog:article_update' pk=article.pk %}"
+               class="btn btn-outline-info"
+               role="button">Update Article</a>
+        </h2>
     {% endif %}
-
-   <h2 class="display-3 text-center">Article Title: {{ article.title }}</h2>
-   <h3 class="text-center">Author: {{ article.author }} </h3>
-   <p class="text-center">Category: {{ article.category}}</p>
-   <p class="text-center">Category Description: {{ article.category.description }}</p>
-   <p class="text-center display-6">Article Entry: {{article.entry}}</p>
-   <p ><small>Created on: {{ article.created_on }}</small></p>
-   <p ><small>Updated on: {{ article.updated_on }}</small></p>
-
-   <h2>Other Articles by {{ request.user.profile }}</h2>
-   <ul>
-       {% for other_article in request.user.profile.article_set.all %}
-           {% if other_article != object %}
-               <li><a class="btn btn-secondary btn-lg" role="button" href="{{ other_article.get_absolute_url }}">{{ other_article.title }}</a></li>
-           {% endif %}
-       {% endfor %}
-   </ul>
-   {% if request.user.is_authenticated %}
-   <h3 >Add a Comment</h3>
-   <form method="post">
-       {% csrf_token %}
-       {{ comment_form.as_p }}
-       <button type="submit" class="btn btn-outline-info">Submit</button>
-   </form>
-{% endif %}
-   <h3>Comments</h3>
-<ul>
-   {% for comment in comments %}
-       <li> {{ comment.author }} said: {{ comment.entry }}</li>
-  
-   {% endfor %}
-</ul>
-  
+    <h2 class="display-3 text-center">Article Title: {{ article.title }}</h2>
+    <h3 class="text-center">Author: {{ article.author }}</h3>
+    <p class="text-center">Category: {{ article.category }}</p>
+    <p class="text-center">Category Description: {{ article.category.description }}</p>
+    <p class="text-center display-6">Article Entry: {{ article.entry }}</p>
+    <p>
+        <small>Created on: {{ article.created_on }}</small>
+    </p>
+    <p>
+        <small>Updated on: {{ article.updated_on }}</small>
+    </p>
+    <h2>Other Articles by {{ request.user.profile }}</h2>
+    <ul>
+        {% for other_article in request.user.profile.article_set.all %}
+            {% if other_article != object %}
+                <li>
+                    <a class="btn btn-secondary btn-lg"
+                       role="button"
+                       href="{{ other_article.get_absolute_url }}">{{ other_article.title }}</a>
+                </li>
+            {% endif %}
+        {% endfor %}
+    </ul>
+    {% if request.user.is_authenticated %}
+        <h3>Add a Comment</h3>
+        <form method="post">
+            {% csrf_token %}
+            {{ comment_form.as_p }}
+            <button type="submit" class="btn btn-outline-info">Submit</button>
+        </form>
+    {% endif %}
+    <h3>Comments</h3>
+    <ul>
+        {% for comment in comments %}<li>{{ comment.author }} said: {{ comment.entry }}</li>{% endfor %}
+    </ul>
 {% endblock content %}

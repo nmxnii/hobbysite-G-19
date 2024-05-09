@@ -1,6 +1,6 @@
-{%extends 'base.html'%}
+{% extends 'base.html' %}
 {% block styles %}
-<style>
+    <style>
     body {
         text-align: center;
         font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
@@ -85,17 +85,22 @@
     }
 
     
-</style>
+    </style>
 {% endblock styles %}
-{%block header%}
-<h1>Create a Product!</h1>
-{%endblock header%}
-{%block content%}
-
-<br><form method="POST">
-    {% csrf_token %}
-    {{ form }}
-    <br><button type="submit" class= "button button1"> <p class="thick">Create</p></button>
-</form>
-<h5><a href="/merchstore/items"> Return to Homepage </a></h5>
-{%endblock content%}
+{% block header %}
+    <h1>Create a Product!</h1>
+{% endblock header %}
+{% block content %}
+    <br>
+    <form method="POST">
+        {% csrf_token %}
+        {{ form }}
+        <br>
+        <button type="submit" class= "button button1">
+            <p class="thick">Create</p>
+        </button>
+    </form>
+    <h5>
+        <a href="/merchstore/items">Return to Homepage</a>
+    </h5>
+{% endblock content %}

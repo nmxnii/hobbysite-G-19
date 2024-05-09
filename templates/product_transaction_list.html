@@ -1,6 +1,6 @@
-{%extends 'base.html'%}
+{% extends 'base.html' %}
 {% block styles %}
-<style>
+    <style>
     body {
         text-align: center;
         font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
@@ -59,35 +59,36 @@
         margin: 0
     }
     
-</style>
+    </style>
 {% endblock styles %}
-{%block header%}
-<h1>Transactions!</h1>
-{%endblock header%}
-{%block content%}
-{% if request.user.is_authenticated %}
-    <h1>Product Transactions:</h1>
-    {% for buyer in buyerAll %}
-        {% if buyer.user != request.user %}
-        
-            <h3>Purchased by: {{buyer.user}}</h3>
+{% block header %}
+    <h1>Transactions!</h1>
+{% endblock header %}
+{% block content %}
+    {% if request.user.is_authenticated %}
+        <h1>Product Transactions:</h1>
+        {% for buyer in buyerAll %}
+            {% if buyer.user != request.user %}
+                <h3>Purchased by: {{ buyer.user }}</h3>
                 {% for transaction in itemsSold %}
                     {% if buyer.user.username == transaction.buyer.user.username %}
-
-                        <br>Product: {{transaction.product.name}}
-                        <br>Amount: {{transaction.amount}}
-                        <br>Status: {{transaction.status}}
-                        <br>Transaction On: {{transaction.createdOn}}
+                        <br>
+                        Product: {{ transaction.product.name }}
+                        <br>
+                        Amount: {{ transaction.amount }}
+                        <br>
+                        Status: {{ transaction.status }}
+                        <br>
+                        Transaction On: {{ transaction.createdOn }}
                         <br>
                     {% endif %}
-
-                {% endfor%}
-            
-        
+                {% endfor %}
+            {% endif %}
+        {% endfor %}
+        <br>
+        <b>Number of products being transacted: {{ total }}</b>
     {% endif %}
-{% endfor %}
-<br> <b>Number of products being transacted: {{total}}</b>
-{%endif%}
-<h5><a href="/merchstore/items"> Return to Homepage </a></h5>
-
-{%endblock content%}
+    <h5>
+        <a href="/merchstore/items">Return to Homepage</a>
+    </h5>
+{% endblock content %}

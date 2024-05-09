@@ -1,52 +1,58 @@
 {% extends 'base.html' %}
 <meta charset="UTF-8">
-        <meta name="viewport" content="width=device-width, initial-scale=1.0">
-        
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
 {% block content %}
-<h1 class="display-3 text-center" >Merchandise Store!</h1>
-<h2 class="text-center"><a href= "/merchstore/cart" class="btn btn-outline-info" role="button"> Cart</a></h2>
-<br>
-<h2 class="text-center"><a href= "/merchstore/transactions" class="btn btn-outline-info" role="button" > Transactions</a></h2>
+    <h1 class="display-3 text-center">Merchandise Store!</h1>
+    <h2 class="text-center">
+        <a href= "/merchstore/cart" class="btn btn-outline-info" role="button">Cart</a>
+    </h2>
+    <br>
+    <h2 class="text-center">
+        <a href="/merchstore/transactions"
+           class="btn btn-outline-info"
+           role="button">Transactions</a>
+    </h2>
     <ul>
         <h2>Your Products:</h2>
-        {%for productType in object_list%}
-        <p>  <font size="+1"><b>{{productType.name}}: </b></font>
-        <br>{{productType.description}}
-        </p>
-            
+        {% for productType in object_list %}
+            <p>
+                <font size="+1"><b>{{ productType.name }}: </b></font>
+                <br>
+                {{ productType.description }}
+            </p>
             {% for productT in productType.product.all %}
-               
                 {% if productT.Owner  == request.user.profile %}
-                    
                     <ul>
                         <li>
-                            <a href= "{{ productT.get_absolute_url }}" class="btn btn-secondary btn-lg" role="button"> {{productT.name}} </a>
+                            <a href="{{ productT.get_absolute_url }}"
+                               class="btn btn-secondary btn-lg"
+                               role="button">{{ productT.name }}</a>
                         </li>
                     </ul>
                 {% endif %}
             {% endfor %}
-        {%endfor%}
+        {% endfor %}
         <h2>All Products:</h2>
-        {%for productType in object_list%}
-        <p>  <font size="+1"><b>{{productType.name}}: </b></font>
-        <br>{{productType.description}}
-        </p>
-            
+        {% for productType in object_list %}
+            <p>
+                <font size="+1"><b>{{ productType.name }}: </b></font>
+                <br>
+                {{ productType.description }}
+            </p>
             {% for productT in productType.product.all %}
-               
                 {% if productT.Owner  != request.user.profile %}
-                    
                     <ul>
                         <li>
-                            <a href= "{{ productT.get_absolute_url }}" > {{productT.name}} </a>
+                            <a href= "{{ productT.get_absolute_url }}">{{ productT.name }}</a>
                         </li>
                     </ul>
                 {% endif %}
             {% endfor %}
-        {%endfor%}
+        {% endfor %}
     </ul>
-
-
-
-<h2 class="text-center"><a href= "/merchstore/item/add" class="btn btn-outline-info" role="button"> Create a New Product Here!</a></h2>
+    <h2 class="text-center">
+        <a href="/merchstore/item/add"
+           class="btn btn-outline-info"
+           role="button">Create a New Product Here!</a>
+    </h2>
 {% endblock %}

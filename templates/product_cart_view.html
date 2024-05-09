@@ -1,6 +1,6 @@
-{%extends 'base.html'%}
+{% extends 'base.html' %}
 {% block styles %}
-<style>
+    <style>
     body {
         text-align: center;
         font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
@@ -85,39 +85,35 @@
     }
 
     
-</style>
+    </style>
 {% endblock styles %}
-{%block header%}
-{%endblock header%}
-{%block content%}
-{% if request.user.is_authenticated %}
-    <h1>Your Cart!</h1>
+{% block header %}
+{% endblock header %}
+{% block content %}
+    {% if request.user.is_authenticated %}
+        <h1>Your Cart!</h1>
         {% for seller in sellerAll %}
             {% if seller.user != request.user %}
-                
-                    <h3>Owned by: {{seller.user}}</h3>
-                        {% for product in itemsBought %}
-                            {% if product.product.Owner == seller %}
-                            
-                                <br>Product: {{product.product.name}}
-                                <br>Amount: {{product.amount}}
-                                <br>Transaction On: {{product.createdOn}}
-                                <br>Status: {{product.status}}
-                                <br>
-                            
-                            {% endif %}
-                        {% endfor%}
-                    
-                
+                <h3>Owned by: {{ seller.user }}</h3>
+                {% for product in itemsBought %}
+                    {% if product.product.Owner == seller %}
+                        <br>
+                        Product: {{ product.product.name }}
+                        <br>
+                        Amount: {{ product.amount }}
+                        <br>
+                        Transaction On: {{ product.createdOn }}
+                        <br>
+                        Status: {{ product.status }}
+                        <br>
+                    {% endif %}
+                {% endfor %}
             {% endif %}
         {% endfor %}
-    <br> <b>Number of products in your cart: {{total}}</b>
-{%endif%}
-
-
-
-
-    
-
-<h5><a href="/merchstore/items"> Return to Homepage </a></h5>
-{%endblock content%}
+        <br>
+        <b>Number of products in your cart: {{ total }}</b>
+    {% endif %}
+    <h5>
+        <a href="/merchstore/items">Return to Homepage</a>
+    </h5>
+{% endblock content %}

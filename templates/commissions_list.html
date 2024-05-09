@@ -1,99 +1,88 @@
 {% extends "base.html" %}
 {% load static %}
 {% block content %}
-
      <ul>
-
           {% if object_list %}
                {% if request.user.is_authenticated %}
-
-                    <h2 class="text-center display-4">Created Commissions</h2>
-               {% for commission in object_list %}
-                    <h2>
-                    {% if commission.author.pk == user.pk %}
-                    <a class="btn btn-secondary btn-lg" role="button" href="{{commission.get_absolute_url}}">
-                         {{commission.title}}
-                    </a>
-                    {% endif %}
-                    </h2>
-               {% endfor %}
-
-               <h2 class="h3">Commissions you applied to:</h2>
-               {% for commission in object_list %}
-                    {% for job in commission.jobs.all %}
-                         {% for application in job.applicants.all %}
-                              {% if application.applicant == user.profile %}
-                                   <h2 >
-                                        <a class="btn btn-secondary btn-lg" role="button" href="{{ commission.get_absolute_url }}">
-                                        {{ commission.title }}: {{job.role}}
-                                        </a>
-                                   </h2>
+                    <h2 class="text-start display-4">Created Commissions</h2>
+                    {% for commission in object_list %}
+                         <h2>
+                              {% if commission.author.pk == user.pk %}
+                                   <a class="btn btn-secondary btn-lg"
+                                      role="button"
+                                      href="{{ commission.get_absolute_url }}">{{ commission.title }}</a>
                               {% endif %}
+                         </h2>
+                    {% endfor %}
+                    <h2 class="text-start display-4">Commissions you applied to</h2>
+                    {% for commission in object_list %}
+                         {% for job in commission.jobs.all %}
+                              {% for application in job.applicants.all %}
+                                   {% if application.applicant == user.profile %}
+                                        <h2>
+                                             <a class="btn btn-secondary btn-lg"
+                                                role="button"
+                                                href="{{ commission.get_absolute_url }}">
+                                                  {{ commission.title }}: {{ job.role }}
+                                             </a>
+                                        </h2>
+                                   {% endif %}
+                              {% endfor %}
                          {% endfor %}
                     {% endfor %}
-               {% endfor %}
-          {% endif %}
-
-
-      <h1 class="text-center display-4">All commissions</h1>
-        <h2 class="h3">Open Commissions:</h2>
-          {% for commission in object_list %}
-
-           <h2>
-                {% if commission.status == "open" %}
-
-               <a class="btn btn-secondary btn-lg" role="button" href="{{commission.get_absolute_url}}">
-                    {{commission.title}}
-               </a>
                {% endif %}
-           </h2>
-          {% endfor %}
-
-          <h2 class="h3"> Full Commissions: </h2>
-          {% for commission in object_list %}
-          <h2>
-            {% if commission.status == "full" %}
-           <a class="btn btn-secondary btn-lg" role="button"href="{{commission.get_absolute_url}}">
-                {{commission.title}}
-           </a>
-           {% endif %}
-            </h2>
-          {% endfor %}
-        
-
-          <h2 class="h3">Completed Commissions:</h2>
-          {% for commission in object_list %}
-          <h2 >
-            {% if commission.status == "completed" %}
-           <a class="btn btn-secondary btn-lg" role="button" href="{{commission.get_absolute_url}}">
-                {{commission.title}}
-           </a>
-           {% endif %}
-            </h2>
-          {% endfor %}
-
-          <h2 class="h3">Discontinued Commissions:</h2>
-          {% for commission in object_list %}
-          <h2>
-            {% if commission.status == "discontinued" %}
-           <a class="btn btn-secondary btn-lg" role="button" href="{{commission.get_absolute_url}}">
-                {{commission.title}}
-           </a>
-           {% endif %}
-            </h2>
-          {% endfor %}
-
-        
-        
-     {% if request.user.is_authenticated %}
-  
-        <h2 class="text-center"><a class="btn btn-outline-info" role="button" href="/commissions/add">Create a new commission</a></h2>
-        {% endif %}
-    
-        {% else %}
-        <h1 class="text-center"><a href="/commissions/add" class="btn btn-outline-info btn-lg" role="button">No Commissions yet. Create a new commission</a></h1>
-
-      {% endif %}
+               <h1 class="text-start display-4">All commissions</h1>
+               <h2 class="h3">Open Commissions:</h2>
+               {% for commission in object_list %}
+                    <h2>
+                         {% if commission.status == "open" %}
+                              <a class="btn btn-secondary btn-lg"
+                                 role="button"
+                                 href="{{ commission.get_absolute_url }}">{{ commission.title }}</a>
+                         {% endif %}
+                    </h2>
+               {% endfor %}
+               <h2 class="h3">Full Commissions:</h2>
+               {% for commission in object_list %}
+                    <h2>
+                         {% if commission.status == "full" %}
+                              <a class="btn btn-secondary btn-lg"
+                                 role="button"
+                                 href="{{ commission.get_absolute_url }}">{{ commission.title }}</a>
+                         {% endif %}
+                    </h2>
+               {% endfor %}
+               <h2 class="h3">Completed Commissions:</h2>
+               {% for commission in object_list %}
+                    <h2>
+                         {% if commission.status == "completed" %}
+                              <a class="btn btn-secondary btn-lg"
+                                 role="button"
+                                 href="{{ commission.get_absolute_url }}">{{ commission.title }}</a>
+                         {% endif %}
+                    </h2>
+               {% endfor %}
+               <h2 class="h3">Discontinued Commissions:</h2>
+               {% for commission in object_list %}
+                    <h2>
+                         {% if commission.status == "discontinued" %}
+                              <a class="btn btn-secondary btn-lg"
+                                 role="button"
+                                 href="{{ commission.get_absolute_url }}">{{ commission.title }}</a>
+                         {% endif %}
+                    </h2>
+               {% endfor %}
+               {% if request.user.is_authenticated %}
+                    <h2 class="text-center">
+                         <a class="btn btn-outline-info" role="button" href="/commissions/add">Create a new commission</a>
+                    </h2>
+               {% endif %}
+          {% else %}
+               <h1 class="text-center">
+                    <a href="/commissions/add"
+                       class="btn btn-outline-info btn-lg"
+                       role="button">No Commissions yet. Create a new commission</a>
+               </h1>
+          {% endif %}
      </ul>
-
 {% endblock %}

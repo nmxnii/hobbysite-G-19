@@ -1,6 +1,6 @@
-{%extends 'base.html'%}
+{% extends 'base.html' %}
 {% block styles %}
-<style>
+    <style>
     body {
         text-align: center;
         font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
@@ -59,20 +59,19 @@
         margin: 0
     }
     
-</style>
+    </style>
 {% endblock styles %}
-{%block header%}
-<h1>Update a Product!</h1>
-{%endblock header%}
-{%block content%}
-
-<p>Owner: {{request.user.profile}}</p>
-
-<form method="POST">
-    {% csrf_token %}
-    {{ form }}
-    <button type="submit">Update</button>
-</form>
-
-<h5><a href="/merchstore/items"> Return to Homepage </a></h5>
-{%endblock content%}
+{% block header %}
+    <h1>Update a Product!</h1>
+{% endblock header %}
+{% block content %}
+    <p>Owner: {{ request.user.profile }}</p>
+    <form method="POST">
+        {% csrf_token %}
+        {{ form }}
+        <button type="submit">Update</button>
+    </form>
+    <h5>
+        <a href="/merchstore/items">Return to Homepage</a>
+    </h5>
+{% endblock content %}
