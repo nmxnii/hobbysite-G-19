@@ -3,7 +3,7 @@ from django.http import HttpResponseRedirect
 from user_management.models import Profile
 from django.urls import reverse
 
-from merchstore.models import transaction, Product
+from merchstore.models import Transaction, Product
 from wiki.models import Article
 from blog.models import Article as BlogArticle
 from commissions.models import Commission
@@ -13,7 +13,7 @@ def home(request):
 
 def dashboard(request):
     user = request.user.profile
-    products_bought = transaction.objects.filter(buyer=user, product__status='Delivered')
+    products_bought = Transaction.objects.filter(buyer=user, product__status='Delivered')
     products_sold = Product.objects.filter(Owner=user, product__status='On Cart')
     wiki_articles_created = Article.objects.filter(author=user)
     blog_articles_created = BlogArticle.objects.filter(author=user)
