@@ -1,124 +1,17 @@
 {% extends 'base.html' %}
 {% load static %}
-{% block styles %}
-<style>
-    body {
-        font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-        margin: 0;
-        padding: 0;
-        background-color: #f8f9fa;
-        color: #333;
-    }
-
-    h1 {
-        text-align: center;
-        padding: 20px 0;
-        font-size: 2.5rem;
-        color: #0077b6;
-    }
-
-    h2 {
-        font-size: 2rem;
-        color: #0077b6;
-    }
-
-    a {
-        text-decoration: none;
-        color: #0077b6;
-        transition: color 0.3s ease;
-    }
-
-    a:hover {
-        color: #0077b6;
-    }
-
-    #content {
-        max-width: 800px;
-        margin: 1px auto;
-        padding: 20px;
-        background-color: #fff;
-        border-radius: 8px;
-        box-shadow: 0 0 20px rgba(0, 0, 0, 0.1);
-    }
-
-    p {
-        margin: 0;
-    }
-
-    #entry {
-        color: #0077b6;
-        margin: 20;
-        padding: 20px;
-        font-size: 1.5rem;
-    }
-
-    p{
-        margin: 0;
-    }
- 
-    .create{
-        text-align: right;
-        margin-right: 20px;
-    }
-
-    nav {
-        font-size: 20px;
-        margin: 8px 0;
-        display: flex;
-        justify-content: center;
-        background-color: #CCCCCC;
-    }
-
-    nav a {
-        padding: 10px 20px;
-        margin: 0 10px;
-    }
-
-    nav a:hover {
-        background-color: #ddd;
-        border-radius: 5px;
-    }
-
-    #date {
-        font-style: italic;
-        font-size: 0.7rem;
-    }
-
-    .gallery-container {
-        display: grid;
-        grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
-        gap: 20px;
-    }
-
-    .gallery-item {
-        padding: 10px;
-        border: 1px solid #ccc;
-        border-radius: 5px;
-        text-align: center;
-    }
-
-    .gallery-item img {
-        max-width: 100%;
-        height: auto;
-    }
-</style>
-{% endblock styles %}
-
 {% block content %}
-<h1>
-    <a href="/blog/articles">BLOG </a>
-</h1>
-<h4><a href="/home"> &larr; Return to Homepage </a></h>
-<h2> Articles </h2>
-<h4> <a href="{% url 'blog:article_list' %}">Switch to List View</a> </h4>
+<h4><a href="/home" class="btn btn-outline-info btn-lg" role="button"> &larr; Return to Homepage </a></h>
+<h2 class="display-3 text-center"> Articles </h2>
+<h4 class="text-center"> <a href="{% url 'blog:article_list' %}" class="btn btn-outline-info btn-lg" role="button">Switch to List View</a> </h4>
 <div class="gallery-container">
     {% for article in object_list %}
         <div class="gallery-item">
-            <img src="{{ article.header_image.url }}" alt="{{ article.title }}">
-            <a href="{{ article.get_absolute_url }}">{{ article.title }} </a>
+            <img src="{{ article.header_image.url }}" style="width: 200px; height: 200px;" alt="{{ article.title }}">
+            <a href="{{ article.get_absolute_url }}" class="btn btn-secondary btn-lg" role="button">{{ article.title }} </a>
         </div>
     {% endfor %}
 </div>
 </ul>
-<h4><a href="{% url 'blog:article_create' %}">Add Article</a></h4>
+<h4 class="text-center"><a href="{% url 'blog:article_create' %}" class="btn btn-outline-info btn-lg" role="button">Add Article</a></h4>
 {% endblock content %}

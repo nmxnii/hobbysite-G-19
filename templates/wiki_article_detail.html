@@ -14,16 +14,16 @@
 <h2 class="text-center"><a class="btn btn-outline-info" role="button" href="/wiki/article/{{ article.pk }}/edit">Update Article</a></h2>
 {% endif %} 
 
-<h2 class="text-center">Add Comment</h2>
-<form class="text-center" method="POST">
+<h2>Add Comment</h2>
+<form method="POST">
   {% csrf_token %} {{comment_form.as_p}}
   <button type="submit" class="btn btn-outline-info" >Submit</button>
 </form>
 
-<h2 class="text-center">Comments</h2>
+<h2 >Comments</h2>
 <ul>
   {% for comment in comments %}
-  <li class="text-center">{{ comment.author}}: {{comment.entry}}</li>
+  <li >{{ comment.author}}: {{comment.entry}}</li>
   {% endfor %}
 </ul>
 

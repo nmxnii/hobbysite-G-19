@@ -3,9 +3,6 @@
 
 {% block content %}
 
-{% if request.user.is_authenticated %}
-     <h1><a href="{% url 'profile:profile-detail' request.user.pk %}">Profile</a></h1>
-{% endif %}
 <h1 class="text-center">Welcome to our Hobby Site!</h1>
 <h2 class="text-center">Lists of Apps: </h2>
 
@@ -20,7 +17,7 @@
 
 
 {% if request.user.is_authenticated %}
-<h3> <a href="/dashboard">  Check User Dashboard</a> </h3>
+<h3 class="text-center"> <a href="/dashboard" class="btn btn-outline-info" role="button">  Check User Dashboard</a> </h3>
 <h2 class="text-center"><button type="submit" class="btn btn-outline-info"><a href = "{% url 'profile:profile-create'%}">Create a new profile here!</a></h2>
 {% endif %}
 {% endblock content %}

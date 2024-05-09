@@ -5,23 +5,23 @@
 <html lang="en">
 <body>
     <h1 class="text-center">User Dashboard</h1>
-    <h2> Activity Log </h2>
+    <h2 class="text-center"> Activity Log </h2>
 
-    <h3>Blog</h3>
+    <h3 class="text-center">Blog</h3>
     <h4>Articles Created</h4>
     <ul>
         {% for article in blog_articles_created %}
             <li>{{ article }}</li>
         {% endfor %}
     </ul>
-    <h3>Wiki</h3>
+    <h3 class="text-center">Wiki</h3>
     <h4>Articles Created</h4>
     <ul>
         {% for article in wiki_articles_created %}
             <li>{{ article }}</li>
         {% endfor %}
     </ul>
-    <h3>Merchstore</h3>
+    <h3 class="text-center">Merchstore</h3>
     <h4> Products bought </h4>
     <ul>
         {% for product in products_bought %}
@@ -34,14 +34,14 @@
         <li>{{ product }}</li>
         {% endfor %}
     </ul>
-    <h3>Commisions</h3>
-    <h4> Commisions created </h4>
+    <h3 class="text-center">Commissions</h3>
+    <h4> Commissions created </h4>
     <ul>
         {% for commission in commissions_created %}
             <li>{{ commission }}</li>
         {% endfor %}
     </ul>
-    <h4> Commisions joined </h4>
+    <h4> Commissions joined </h4>
     <ul>
         {% for commission in commissions_joined %}
             <li>{{ commission }}</li>

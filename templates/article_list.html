@@ -7,7 +7,7 @@
     {% for article in object_list %}
         {% if article.author == request.user.profile %}
             <li>
-                <a href="{{ article.get_absolute_url }}">{{ article.title }}</a>
+                <a href="{{ article.get_absolute_url }}" class="btn btn-secondary btn-lg" role="button">{{ article.title }}</a>
             </li>
         {% endif %}
     {% endfor %}
@@ -17,7 +17,7 @@
     {% for article in object_list %}
         {% if article.category.id == category.id and article.author != request.user.profile %}
             <li>
-                <a class="btn btn-secondary btn-lg" role="button" href="{{ article.get_absolute_url }}">{{ article.title }} </a>
+                <a href="{{ article.get_absolute_url }}" class="btn btn-secondary btn-lg" role="button">{{ article.title }} </a>
             </li>
         {% endif %}
     {% endfor %}

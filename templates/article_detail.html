@@ -10,7 +10,7 @@
    {% endif %}
    </div>
    {% if article.author == request.user.profile %}
-        <h2 class="text-center"><a href="{% url 'blog:article_update' pk=article.pk %}">Update Article</a></h2>
+        <h2 class="text-center"><a href="{% url 'blog:article_update' pk=article.pk %}" class="btn btn-outline-info" role="button">Update Article</a></h2>
         
     {% endif %}
 
@@ -26,7 +26,7 @@
    <ul>
        {% for other_article in request.user.profile.article_set.all %}
            {% if other_article != object %}
-               <li><a href="{{ other_article.get_absolute_url }}">{{ other_article.title }}</a></li>
+               <li><a class="btn btn-secondary btn-lg" role="button" href="{{ other_article.get_absolute_url }}">{{ other_article.title }}</a></li>
            {% endif %}
        {% endfor %}
    </ul>
