@@ -1,6 +1,6 @@
 from django import forms
 
-from .models import Product, ProductType, transaction
+from .models import Product, ProductType, Transaction
 
 
 class ProductForm(forms.ModelForm):
@@ -14,7 +14,7 @@ class ProductForm(forms.ModelForm):
 
 class TransactionForm(forms.ModelForm):
     class Meta:
-        model=transaction
+        model=Transaction
 
         exclude=['status', 'buyer','product']
 

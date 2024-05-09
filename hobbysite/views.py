@@ -9,9 +9,6 @@ from blog.models import Article as BlogArticle
 from commissions.models import Commission
 
 def home(request):
-    if not (Profile.objects.filter(pk=request.user.pk).exists()) :
-        return HttpResponseRedirect(reverse('profile:profile-create', kwargs={"pk": request.user.pk}))
-
     return render(request, "home.html")
 
 def dashboard(request):

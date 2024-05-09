@@ -22,11 +22,12 @@
   <div id="content">
     {% block content %}
     {% endblock %}
+
     {% if request.user.is_authenticated %} 
 
       <form action="{% url 'logout' %}" method="POST">
           {% csrf_token %}
-          <h2 class="text-center"><button type="submit" class="btn btn-outline-info">LOG OUT</button></h2>
+          <h2 class="text-center"><button type="submit" class="btn btn-outline-info">Log Out</button></h2>
       </form> 
       {% else %}
       <h2 class="text-center"><button type="submit" class="btn btn-outline-info"><a href = "{%url 'login'%}">Login</a></h2>
