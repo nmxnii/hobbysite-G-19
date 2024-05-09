@@ -3,35 +3,36 @@
 {% block content %}
 
      <ul>
-      {% if object_list %}
-      <h2 class="text-center display-3">Created Commissions</h2>
-      {% for commission in object_list %}
-      <h2>
-        {% if commission.author.pk == user.pk %}
-       <a class="btn btn-secondary btn-lg" role="button" href="{{commission.get_absolute_url}}">
-            {{commission.title}}
-       </a>
-       {% endif %}
-        </h2>
-      {% endfor %}
 
-      <h2 class="display-5">Commissions you applied to:</h2>
+          {% if object_list %}
+               {% if request.user.is_authenticated %}
 
-      
+                    <h2 class="text-center display-3">Created Commissions</h2>
+               {% for commission in object_list %}
+                    <h2>
+                    {% if commission.author.pk == user.pk %}
+                    <a class="btn btn-secondary btn-lg" role="button" href="{{commission.get_absolute_url}}">
+                         {{commission.title}}
+                    </a>
+                    {% endif %}
+                    </h2>
+               {% endfor %}
 
-     {% for commission in object_list %}
-          {% for job in commission.jobs.all %}
-              {% for application in job.applicants.all %}
-                  {% if application.applicant == user.profile %}
-                      <h2 >
-                          <a class="btn btn-secondary btn-lg" role="button" href="{{ commission.get_absolute_url }}">
-                              {{ commission.title }}: {{job.role}}
-                          </a>
-                      </h2>
-                  {% endif %}
-              {% endfor %}
-          {% endfor %}
-      {% endfor %} 
+               <h2 class="display-5">Commissions you applied to:</h2>
+               {% for commission in object_list %}
+                    {% for job in commission.jobs.all %}
+                         {% for application in job.applicants.all %}
+                              {% if application.applicant == user.profile %}
+                                   <h2 >
+                                        <a class="btn btn-secondary btn-lg" role="button" href="{{ commission.get_absolute_url }}">
+                                        {{ commission.title }}: {{job.role}}
+                                        </a>
+                                   </h2>
+                              {% endif %}
+                         {% endfor %}
+                    {% endfor %}
+               {% endfor %}
+          {% endif %}
 
 
       <h1 class="text-center display-2">All commissions:</h1>

@@ -3,6 +3,7 @@
 
 
 {% block content %}
+{% if request.user.is_authenticated %}
 
     {% if user.profile == commission.author %}
     <form method="POST" >
@@ -23,4 +24,8 @@
         <h2>ur not the author</h2>
 
     {% endif %}
+{% else %}
+    <h1>Log-in first</h1>
+{% endif %}
+
 {% endblock content %}

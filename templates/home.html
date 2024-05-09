@@ -18,6 +18,9 @@
 
 {% if request.user.is_authenticated %}
 <h3 class="text-center"> <a href="/dashboard" class="btn btn-outline-info" role="button">  Check User Dashboard</a> </h3>
+{% if not request.user.profile %}
 <h2 class="text-center"><button type="submit" class="btn btn-outline-info"><a href = "{% url 'profile:profile-create'%}">Create a new profile here!</a></h2>
+{% endif %}
+
 {% endif %}
 {% endblock content %}
