@@ -1,5 +1,6 @@
 {% extends 'base.html' %} {%load static%} 
 {% block content %}
+{% if request.user.is_authenticated %} 
 <h2 class="display-3 text-center">Your Articles</h2>
 <h2 class="text-center">
   <a href="/wiki/article/add"><h2 class="btn btn-outline-info" role="button">Create Article</h2></a></h2>
@@ -17,6 +18,7 @@
   {% endfor %}
 </div>
 </ul>
+{% endif %} 
 <h2 class="display-3 text-center">All Articles</h2>
 <ul>
   {% for category in categories %}
