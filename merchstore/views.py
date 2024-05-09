@@ -5,7 +5,7 @@ from django.views.generic.edit import CreateView, UpdateView, FormView
 from django.contrib.auth.mixins import LoginRequiredMixin
 from django.urls import reverse_lazy, reverse
 
-from .models import Product, ProductType,transaction, Profile
+from .models import Product, ProductType,Transaction, Profile
 
 from .forms import ProductForm,TransactionForm
 
@@ -97,14 +97,14 @@ class ProductDetailView(DetailView):
 
 
 class TransactionListView(LoginRequiredMixin, ListView):
-    model=transaction
+    model=Transaction
     template_name = "product_transaction_list.html"
     def get_context_data(self, **kwargs):
         context=super().get_context_data(**kwargs)        
         user=Profile.objects.get(user=self.request.user)
         buyer=Profile.objects.all()
         sellerItems=Product.objects.filter(Owner=user)
-        product=transaction.objects.filter(product__in=sellerItems)
+        product=Transaction.objects.filter(product__in=sellerItems)
         totalProducts=0
         
         for total in product:
@@ -116,14 +116,14 @@ class TransactionListView(LoginRequiredMixin, ListView):
         return context
 
 class CartView(LoginRequiredMixin, ListView):
-    model=transaction
+    model=Transaction
     template_name = "product_cart_view.html"
 
 
     def get_context_data(self, **kwargs):
         context=super().get_context_data(**kwargs)        
         user=Profile.objects.get(user=self.request.user)
-        product=transaction.objects.filter(buyer=user)
+        product=Transaction.objects.filter(buyer=user)
         seller=Profile.objects.all()
         totalProducts=0
         

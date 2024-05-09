@@ -48,7 +48,7 @@ class Product(models.Model):
         return reverse('merchstore:product_detail', args=[self.pk])
 
 
-class transaction(models.Model):
+class Transaction(models.Model):
     buyer=models.ForeignKey(
         Profile,
         on_delete=models.SET_NULL, 
