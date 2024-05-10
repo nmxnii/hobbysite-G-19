@@ -6,23 +6,22 @@
                {% if request.user.is_authenticated %}
                     <h2 class="text-start display-4">Created Commissions</h2>
                          {% for commission in commissions_created %}
-                              <a class="btn btn-secondary btn-lg"
+                              <h2><a class="btn btn-secondary btn-lg"
                                       role="button"
-                                      href="{{ commission.get_absolute_url }}">{{ commission.title }}</a>
+                                      href="{{ commission.get_absolute_url }}">{{ commission.title }}</a></h2><br>
                               {% empty %}
-                                   <h5>No commissions created yet.</h5> 
+                                   No commissions created yet.
                          {% endfor %}
                     <h2 class="text-start display-4">Commissions you applied to</h2>
                          {% for commission in commissions_joined  %}
-                              <a class="btn btn-secondary btn-lg"
+                              <h2><a class="btn btn-secondary btn-lg"
                               role="button"
                               href="{{ commission.get_absolute_url }}">
                               {{ commission.title }}
-                              </a>
-                              {% empty %}
-                                   <h2>No commissions applied yet.</h2> 
-                         {% endfor %}        
-                    <hr>
+                              </a></h2><br>
+                              {% empty %} No commissions applied yet.
+                         {% endfor %}    
+                         <hr>    
                {% endif %}
                <h1 class="text-center display-3">All commissions</h1>
                <h2 class="h3">Open Commissions:</h2>
@@ -31,7 +30,7 @@
                          <a class="btn btn-secondary btn-lg"
                             role="button"
                             href="{{ commission.get_absolute_url }}">{{ commission.title }}</a>
-               </h2>
+               </h2><br>
                {% endfor %}
                <h2 class="h3">Full Commissions:</h2>
                {% for commission in full_commissions %}
@@ -39,23 +38,29 @@
                          <a class="btn btn-secondary btn-lg"
                             role="button"
                             href="{{ commission.get_absolute_url }}">{{ commission.title }}</a>
-               </h2>
-               {% endfor %}
+               </h2><br>
+               {% empty %} No full commissions yet.
+               {% endfor %} <hr>
                <h2 class="h3">Completed Commissions:</h2>
                {% for commission in completed_commissions %}
                     <h2>
                               <a class="btn btn-secondary btn-lg"
                                  role="button"
                                  href="{{ commission.get_absolute_url }}">{{ commission.title }}</a>
-                    </h2>
+                    </h2><br>
+                    {% empty %} No completed commissions yet.
+
                {% endfor %}
+               <hr>
                <h2 class="h3">Discontinued Commissions:</h2>
                {% for commission in discontinued_commissions %}
                     <h2>
                               <a class="btn btn-secondary btn-lg"
                                  role="button"
                                  href="{{ commission.get_absolute_url }}">{{ commission.title }}</a>
-                    </h2>
+                    </h2><br>
+                    {% empty %} No discontinued commissions yet.
+
                {% endfor %}
 
 

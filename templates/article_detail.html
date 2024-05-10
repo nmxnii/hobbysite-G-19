@@ -34,19 +34,20 @@
     <p>
         <small>Updated on: {{ article.updated_on }}</small>
     </p>
-    <h2>Other Articles by {{ request.user.profile }}</h2>
+    <hr>
+    <h2>Other Articles by {{ article.author }}</h2>
     <ul>
-        {% for other_article in request.user.profile.article_set.all %}
+        {% for other_article in article.author.article_set.all %}
             {% if other_article != object %}
-                <li>
-                    <a class="btn btn-secondary btn-lg"
+                    <h2><a class="btn btn-secondary btn-lg"
                        role="button"
                        href="{{ other_article.get_absolute_url }}">{{ other_article.title }}</a>
-                </li>
+                    </h2><br>
             {% endif %}
         {% endfor %}
     </ul>
     {% if request.user.is_authenticated %}
+    <hr>
         <h3>Add a Comment</h3>
         <form method="post">
             {% csrf_token %}
@@ -54,8 +55,12 @@
             <button type="submit" class="btn btn-outline-info">Submit</button>
         </form>
     {% endif %}
+    <hr>
     <h3>Comments</h3>
     <ul>
-        {% for comment in comments %}<li>{{ comment.author }} said: {{ comment.entry }}</li>{% endfor %}
+        {% for comment in comments %}
+        <p>{{ comment.author }} said: {{ comment.entry }} </p>
+        {% empty %} No comments yet.
+        {% endfor %}
     </ul>
 {% endblock content %}
