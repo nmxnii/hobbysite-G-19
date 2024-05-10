@@ -8,7 +8,7 @@
         <h1>Product Transactions:</h1>
         {% for buyer in buyerAll %}
             {% if buyer.user != request.user %}
-                <h3>Purchased by: {{ buyer.user }}</h3>
+                <h3>Purchased by: {{ buyer.user.profile }}</h3>
                 {% for transaction in itemsSold %}
                     {% if buyer.user.username == transaction.buyer.user.username %}
                         <br>
