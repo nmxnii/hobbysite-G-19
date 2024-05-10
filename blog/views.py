@@ -51,6 +51,11 @@ class ArticleCreateView(CreateView):
     form_class = ArticleForm
     template_name = "article_create.html"
 
+    def get_initial(self):
+        initial = super().get_initial()
+        initial['author']=self.request.user.profile
+        return initial
+
     def get_success_url(self):
         return reverse_lazy("blog:article_list")
 
