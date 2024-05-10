@@ -1,0 +1,15 @@
+{% extends "base.html" %}
+{% load static %}
+{% block content %}
+    <h2>Login</h2>
+    <form method="post" class="row g-3">
+        {% csrf_token %}
+        {{ form.as_p }}
+        <button type="submit" class="btn btn-outline-info">Login</button>
+    </form>
+    <br>
+    <h2 class="text-center">
+    <a href="/accounts/signup/" class="btn btn-outline-info" role="button">Sign up here</a>
+    <a href="{% url 'password_reset' %}" class="btn btn-outline-info" role="button">Forgot Password</a>
+</h2>
+{% endblock content %}
