@@ -19,6 +19,7 @@
                         {% endif %}
                         {% empty %} No created articles yet.
                     {% endfor %}
+                    <hr>
                 {% endif %}
                 <h2 class="text-start display-4">All Articles</h2>
                 {% for category in article_category %}
@@ -27,9 +28,10 @@
                         {% if article.category.id == category.id and article.author != request.user.profile %}
                                 <a href="{{ article.get_absolute_url }}"
                                    class="btn btn-secondary btn-lg"
-                                   role="button">{{ article.title }}</a><hr>
+                                   role="button">{{ article.title }}</a>
                         {% endif %}
                     {% endfor %}
+                    <hr>
                 {% endfor %}
             </ul>
             {% if request.user.is_authenticated %}
