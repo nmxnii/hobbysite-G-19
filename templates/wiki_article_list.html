@@ -1,6 +1,9 @@
 {% extends 'base.html' %}
 {% load static %}
 {% block content %}
+<h4>
+  <a href="/home" class="btn btn-outline-info btn-lg" role="button">&larr; Return to Homepage</a>
+</h4>
 <h4 class="text-center">
   <a href="{% url 'wiki:wiki_gallery_view' %}"
      class="btn btn-outline-info btn-lg"
@@ -15,7 +18,7 @@
                 <h2><a class="btn btn-secondary btn-lg"
                  role="button"
                  href="{{ article.get_absolute_url }}">{{ article }}</a>
-                </h2>
+                </h2><br>
               
           {% endif %}
           {% empty %} No article created yet.
@@ -35,7 +38,7 @@
                 <h2><a class="btn btn-secondary btn-lg"
                    role="button"
                    href="{{ article.get_absolute_url }}">{{ article }}</a>
-                  </h2>
+                  </h2><br>
             {% endif %}
           {% endif %}
         {% endfor %}
