@@ -4,7 +4,7 @@
 {% block content %}
     
     <h1 class="display-3 text-center">Merchandise Store!</h1>
-    {% if request.user.is_authenticated %}
+  
     <h2 class="text-center">
         <a href= "/merchstore/cart" class="btn btn-outline-info" role="button">Cart</a>
         <a href="/merchstore/transactions"
@@ -12,11 +12,10 @@
            role="button">Transactions</a>
     </h2>
     <ul>
-<<<<<<< HEAD
 
-=======
+
         {% if request.user.is_authenticated %}
->>>>>>> a68b9a92bc5af8728f53322fca513099a9a1ec94
+
         <h2>Your Products:</h2>
         {% for productType in object_list %}
             <p>
@@ -34,12 +33,11 @@
                 {% endif %}
             {% endfor %}
         {% endfor %}
-<<<<<<< HEAD
-    {% endif %}
-=======
+
+
         <hr>
         {% endif %}
->>>>>>> a68b9a92bc5af8728f53322fca513099a9a1ec94
+
         <h2>All Products:</h2>
         {% for productType in object_list %}
             <p>
