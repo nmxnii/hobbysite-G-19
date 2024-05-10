@@ -37,12 +37,12 @@
 
     <h2>Other Articles by {{ article.author }}</h2>
     <ul>
-        {% for other_article in object_list %}
-        {% if other_article.author == object.author and other_article != object %}
+        {% for article in object_list %}
+        {% if article == object.author %}
             <li>
                 <a class="btn btn-secondary btn-lg"
                    role="button"
-                   href="{{ other_article.get_absolute_url }}">{{ other_article.title }}</a>
+                   href="{{ article.get_absolute_url }}">{{ article.title }}</a>
             </li>
         {% endif %}
     {% endfor %}
