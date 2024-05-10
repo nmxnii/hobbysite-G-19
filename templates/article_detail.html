@@ -38,11 +38,10 @@
     <ul>
         {% for other_article in request.user.profile.article_set.all %}
             {% if other_article != object %}
-                <li>
                     <a class="btn btn-secondary btn-lg"
                        role="button"
                        href="{{ other_article.get_absolute_url }}">{{ other_article.title }}</a>
-                </li>
+                <hr>
             {% endif %}
         {% endfor %}
     </ul>
@@ -56,6 +55,6 @@
     {% endif %}
     <h3>Comments</h3>
     <ul>
-        {% for comment in comments %}<li>{{ comment.author }} said: {{ comment.entry }}</li>{% endfor %}
+        {% for comment in comments %}{{ comment.author }} said: {{ comment.entry }}<hr>{% endfor %}
     </ul>
 {% endblock content %}

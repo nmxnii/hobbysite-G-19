@@ -17,6 +17,7 @@
                      style="width: 200px;
                             height: 200px"
                      alt="{{ article.title }}">
+                     <br>
                 <a href="{{ article.get_absolute_url }}"
                    class="btn btn-secondary btn-lg"
                    role="button">{{ article.title }}</a>
@@ -24,9 +25,11 @@
         {% endfor %}
     </div>
 </ul>
+{% if request.user.is_authenticated %}
 <h4 class="text-center">
     <a href="{% url 'blog:article_create' %}"
        class="btn btn-outline-info btn-lg"
        role="button">Add Article</a>
 </h4>
+{% endif %}
 {% endblock content %}
