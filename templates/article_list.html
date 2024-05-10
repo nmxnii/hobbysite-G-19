@@ -1,9 +1,12 @@
 {% extends 'base.html' %}
 {% load static %}
 {% block content %}
+    <h4>
+        <a href="/home" class="btn btn-outline-info btn-lg" role="button">&larr; Return to Homepage</a>
+    </h4>
     <ul>
         <h4>
-            <a class="btn btn-outline-info" role="button" href="/home">&larr; Return to Homepage</a></h>
+                            
                 <h4 class="text-center">
                     <a class="btn btn-outline-info"
                        role="button"
@@ -15,7 +18,7 @@
                         {% if article.author == request.user.profile %}
                                 <h2><a href="{{ article.get_absolute_url }}"
                                    class="btn btn-secondary btn-lg"
-                                   role="button">{{ article.title }}</a></h2>
+                                   role="button">{{ article.title }}</a></h2><br>
                         {% endif %}
                         {% empty %} No created articles yet.
                     {% endfor %}
@@ -26,9 +29,9 @@
                     <h3>{{ category }}</h3>
                     {% for article in object_list %}
                         {% if article.category.id == category.id and article.author != request.user.profile %}
-                                <h2><a href="{{ article.get_absolute_url }}"
+                                <a href="{{ article.get_absolute_url }}"
                                    class="btn btn-secondary btn-lg"
-                                   role="button">{{ article.title }}</a></h2>
+                                   role="button">{{ article.title }}</a>
                         {% endif %}
                     {% endfor %}
                     <hr>
