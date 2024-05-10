@@ -29,9 +29,9 @@
                     <h3>{{ category }}</h3>
                     {% for article in object_list %}
                         {% if article.category.id == category.id and article.author != request.user.profile %}
-                                <a href="{{ article.get_absolute_url }}"
+                                <h2><a href="{{ article.get_absolute_url }}"
                                    class="btn btn-secondary btn-lg"
-                                   role="button">{{ article.title }}</a>
+                                   role="button">{{ article.title }}</a></h2>
                         {% endif %}
                     {% endfor %}
                     <hr>
