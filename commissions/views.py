@@ -24,6 +24,17 @@ class CommissionListView(ListView):
         context['jobs'] = Job.objects.all()
         context['applied'] = Commission.objects.filter()
         context['jobapplicant'] = JobApplication.objects.all()
+        if not self.request.user.is_anonymous:
+            context['commissions_created'] = Commission.objects.filter(author=self.request.user.profile)
+            context['commissions_joined'] = Commission.objects.filter(
+            jobs__applicants__applicant=self.request.user.profile,
+            ).distinct()
+        context['open_commissions']=Commission.objects.filter(status='open')
+        context['full_commissions']=Commission.objects.filter(status='full')
+        context['completed_commissions']=Commission.objects.filter(status='completed')
+        context['discontinued_commissions']=Commission.objects.filter(status='discontinued')
+
+        
         return context
 
 

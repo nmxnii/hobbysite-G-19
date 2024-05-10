@@ -8,7 +8,8 @@
         <button type="submit" class="btn btn-outline-info">Login</button>
     </form>
     <br>
-    <a href="/accounts/signup/">Signup here</a>
-    <br>
-    <a href="{% url 'password_reset' %}">Forgot Password</a>
+    <h2 class="text-center">
+    <a href="/accounts/signup/" class="btn btn-outline-info" role="button">Sign up here</a>
+    <a href="{% url 'password_reset' %}" class="btn btn-outline-info" role="button">Forgot Password</a>
+</h2>
 {% endblock content %}
