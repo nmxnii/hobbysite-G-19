@@ -13,10 +13,11 @@
                     <h2 class="text-start display-4">Your Articles</h2>
                     {% for article in object_list %}
                         {% if article.author == request.user.profile %}
-                                <a href="{{ article.get_absolute_url }}"
+                                <h2><a href="{{ article.get_absolute_url }}"
                                    class="btn btn-secondary btn-lg"
-                                   role="button">{{ article.title }}</a><hr>
+                                   role="button">{{ article.title }}</a></h2><br>
                         {% endif %}
+                        {% empty %} No created articles yet.
                     {% endfor %}
                 {% endif %}
                 <h2 class="text-start display-4">All Articles</h2>

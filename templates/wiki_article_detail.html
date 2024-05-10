@@ -31,25 +31,29 @@
       <small>Updated on: {{ article.updated_on }}</small>
     </p>
     {% if request.user.is_authenticated %}
+    <hr>
     <h2>Add Comment</h2>
     <form method="POST">
       {% csrf_token %} {{ comment_form.as_p }}
       <button type="submit" class="btn btn-outline-info">Submit</button>
     </form>
   {% endif %}
+  <hr>
   <h2>Comments</h2>
   <ul>
     {% for comment in comments %}
     
-    {{ comment.author }}: {{ comment.entry }}
-    <hr>
+    <p>{{ comment.author }}: {{ comment.entry }}</p>
+    {% empty %} No comments yet.
+    <br>
     {% endfor %}
   </ul>
+  <hr>
   <h2>Read More</h2>
   {% for others in object_list %}
     {% if article.category == others.category and article.title != others.title %}
-        <a href="{{ others.get_absolute_url }}" class="btn btn-secondary" role="button">{{ others }}</a>
-        <hr>
+        <h2><a href="{{ others.get_absolute_url }}" class="btn btn-secondary" role="button">{{ others }}</a>
+        </h2><br>
     {% endif %}
   {% endfor %}
 {% endblock content %}

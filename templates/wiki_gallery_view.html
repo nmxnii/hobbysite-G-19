@@ -6,21 +6,21 @@
        class="btn btn-outline-info btn-lg"
        role="button">Switch to List View</a>
 </h4>
-  <h2 class="text-start display-4">Articles</h2>
+  <h2 class="text-center display-4">Articles</h2>
   <ul>
-      <div class="gallery">
+      <div class="gallery text-center">
         {% for article in object_list %}
                 {% if article.article_image %}
-                  <img src="{{ article.article_image.url }}"
+                  <h2><img src="{{ article.article_image.url }}"
                        style="width: 200px;
                               height: 200px"
-                       alt="" />
+                       alt="" /></h2><br> 
                 {% endif %}
-                <br> 
-                <a class="btn btn-secondary btn-lg"
+                <h2><a class="btn btn-secondary btn-lg"
                    role="button"
-                   href="{{ article.get_absolute_url }}">{{ article }}</a>
-              <hr>
+                   href="{{ article.get_absolute_url }}">{{ article }}</a></h2>
+              <br>
+              {% empty %} No articles yet.
         {% endfor %}
       </div>
   </ul>

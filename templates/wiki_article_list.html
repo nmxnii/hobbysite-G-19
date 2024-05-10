@@ -12,14 +12,16 @@
       <div class="gallery">
         {% for article in object_list %}
           {% if article.author.pk == user.pk %}
-                <a class="btn btn-secondary btn-lg"
+                <h2><a class="btn btn-secondary btn-lg"
                  role="button"
                  href="{{ article.get_absolute_url }}">{{ article }}</a>
-              <hr>
+                </h2><br>
               
           {% endif %}
+          {% empty %} No article created yet.
         {% endfor %}
       </div>
+      <hr>
     </ul>
   {% endif %}
   <h2 class="text-start display-4">All Articles</h2>
@@ -30,10 +32,10 @@
         {% for article in object_list %}
           {% if article.author.pk != user.pk %}
             {% if article.category == category %}
-                <a class="btn btn-secondary btn-lg"
+                <h2><a class="btn btn-secondary btn-lg"
                    role="button"
                    href="{{ article.get_absolute_url }}">{{ article }}</a>
-              <hr>
+                  </h2><br>
             {% endif %}
           {% endif %}
         {% endfor %}
