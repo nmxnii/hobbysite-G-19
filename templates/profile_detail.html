@@ -1,7 +1,9 @@
 {% extends 'base.html' %}
 {% load static %}
 {% block content %}
-    <a button type="submit" class="btn btn-outline-info" href="/home/">&larr; Back to home</a>
+    <h4>
+        <a href="/home" class="btn btn-outline-info btn-lg" role="button">&larr; Return to Homepage</a>
+    </h4>
     <h2>Profile: {{ profile.display_name }}</h2>
     <h2>Email: {{ profile.email }}</h2>
     {% if user.pk == profile.user.pk %}
