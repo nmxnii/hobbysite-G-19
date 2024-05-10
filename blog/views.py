@@ -28,10 +28,13 @@ class BlogDetailView(DetailView):
     template_name = "article_detail.html"
 
     def get_context_data(self, **kwargs):
+        articles_by_author = Article.objects.filter(author=self.object.author).exclude(pk=self.object.pk)[:2]
+        context['articles_by_author'] = articles_by_author
         context = super().get_context_data(**kwargs)
         article = self.get_object()
         context['comment_form'] = CommentForm() 
         context['comments'] = article.comment_set.all() 
+        
         return context
 
     def post(self, request, *args, **kwargs):
