@@ -1,27 +1,27 @@
 {% extends 'base.html' %}
 {% load static %}
 {% block content %}
+<h4 class="text-center">
+  <a href="{% url 'wiki:wiki_gallery_view' %}"
+     class="btn btn-outline-info btn-lg"
+     role="button">Switch to Gallery View</a>
+</h4>
   {% if request.user.is_authenticated %}
     <h2 class="text-start display-4">Your Articles</h2>
     <ul>
       <div class="gallery">
         {% for article in object_list %}
           {% if article.author.pk == user.pk %}
-              
-              {% if article.article_image %}
-                <img src="{{ article.article_image.url }}"
-                     style="width: 200px;
-                            height: 200px"
-                     alt="" />
-                {% endif %}
-                <a class="btn btn-secondary btn-lg"
+                <h2><a class="btn btn-secondary btn-lg"
                  role="button"
                  href="{{ article.get_absolute_url }}">{{ article }}</a>
-              <hr>
+                </h2><br>
               
           {% endif %}
+          {% empty %} No article created yet.
         {% endfor %}
       </div>
+      <hr>
     </ul>
   {% endif %}
   <h2 class="text-start display-4">All Articles</h2>
@@ -32,16 +32,10 @@
         {% for article in object_list %}
           {% if article.author.pk != user.pk %}
             {% if article.category == category %}
-                {% if article.article_image %}
-                  <img src="{{ article.article_image.url }}"
-                       style="width: 200px;
-                              height: 200px"
-                       alt="" />
-                {% endif %}
-                <a class="btn btn-secondary btn-lg"
+                <h2><a class="btn btn-secondary btn-lg"
                    role="button"
                    href="{{ article.get_absolute_url }}">{{ article }}</a>
-              <hr>
+                  </h2><br>
             {% endif %}
           {% endif %}
         {% endfor %}

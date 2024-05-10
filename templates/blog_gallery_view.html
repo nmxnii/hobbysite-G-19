@@ -10,23 +10,26 @@
            class="btn btn-outline-info btn-lg"
            role="button">Switch to List View</a>
     </h4>
-    <div class="gallery-container">
+    <div class="text-center">
         {% for article in object_list %}
             <div class="gallery-item">
-                <img src="{{ article.header_image.url }}"
+                <h2><img src="{{ article.header_image.url }}"
                      style="width: 200px;
                             height: 200px"
                      alt="{{ article.title }}">
-                <a href="{{ article.get_absolute_url }}"
+                    </h2><br>
+                <h2><a href="{{ article.get_absolute_url }}"
                    class="btn btn-secondary btn-lg"
-                   role="button">{{ article.title }}</a>
+                   role="button">{{ article.title }}</a></h2><br>
             </div>
         {% endfor %}
     </div>
 </ul>
+{% if request.user.is_authenticated %}
 <h4 class="text-center">
     <a href="{% url 'blog:article_create' %}"
        class="btn btn-outline-info btn-lg"
        role="button">Add Article</a>
 </h4>
+{% endif %}
 {% endblock content %}

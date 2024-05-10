@@ -77,3 +77,8 @@ class WikiUpdateView(UpdateView):
     def form_valid(self, form):
         form.instance.author = self.request.user.profile
         return super().form_valid(form)
+
+
+class ImageGalleryView(ListView):
+    model = Article
+    template_name = "wiki_gallery_view.html"
