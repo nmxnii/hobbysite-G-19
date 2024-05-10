@@ -2,6 +2,7 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 {% block content %}
+    {% if request.user.is_authenticated %}
     <h1 class="display-3 text-center">Merchandise Store!</h1>
     <h2 class="text-center">
         <a href= "/merchstore/cart" class="btn btn-outline-info" role="button">Cart</a>
@@ -10,7 +11,7 @@
            role="button">Transactions</a>
     </h2>
     <ul>
-    {% if request.user.is_authenticated %}
+
         <h2>Your Products:</h2>
         {% for productType in object_list %}
             <p>
