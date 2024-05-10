@@ -1,6 +1,9 @@
 {% extends "base.html" %}
 {% load static %}
 {% block content %}
+    <h4>
+        <a href="/home" class="btn btn-outline-info btn-lg" role="button">&larr; Return to Homepage</a>
+    </h4>
     {% if request.user.is_authenticated %}
         {% if user.profile == commission.author %}
             <form method="POST">
