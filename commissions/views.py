@@ -61,10 +61,8 @@ class CommissionDetailView(DetailView):
         return context
 
     def post(self, request, pk):
-        # ctx= self.get_context_data(**kwargs)
         job_application_form = JobApplicationForm(request.POST)
         if job_application_form.is_valid():
-            print('if satisfy')
             job_application = JobApplication()
             job_application.job = Job.objects.get(
                 pk=request.POST.get('job_pk'))
@@ -81,7 +79,6 @@ class CommissionCreateView(View):
 
     def get(self, request):
         commission_form = CommissionCreateForm()
-        # commission = Commission()
         JobFormSet = inlineformset_factory(
             Commission, Job, exclude=['commission'], extra=2)
         formset = JobFormSet()
@@ -144,9 +141,7 @@ class CommissionUpdateView(UpdateView):
     def form_valid(self, form):
         context = self.get_context_data()
         job_formset = context['job_formset']
-        print(job_formset.is_valid())
         if job_formset.is_valid():
-            print('valid')
             self.object = form.save()
             job_formset.instance.commission = self.object
             job_formset.instance = self.object
@@ -157,6 +152,4 @@ class CommissionUpdateView(UpdateView):
                 self.object.save()
             return HttpResponseRedirect(reverse('commissions:commissions'))
         else:
-            print('not valid')
-            print(job_formset.errors)
             return self.render_to_response(self.get_context_data(form=form, job_formset=job_formset))
