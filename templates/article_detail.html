@@ -37,15 +37,13 @@
 
     <h2>Other Articles by {{ article.author }}</h2>
     <ul>
-        {% for article in object_list %}
-        {% if article == object.author %}
+        {% for article in articles_by_author %}
             <li>
                 <a class="btn btn-secondary btn-lg"
                    role="button"
                    href="{{ article.get_absolute_url }}">{{ article.title }}</a>
             </li>
-        {% endif %}
-    {% endfor %}
+        {% endfor %}
 
     </ul>
     {% if request.user.is_authenticated %}
