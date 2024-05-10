@@ -10,6 +10,7 @@
            role="button">Transactions</a>
     </h2>
     <ul>
+    {% if request.user.is_authenticated %}
         <h2>Your Products:</h2>
         {% for productType in object_list %}
             <p>
@@ -29,6 +30,7 @@
                 {% endif %}
             {% endfor %}
         {% endfor %}
+    {% endif %}
         <h2>All Products:</h2>
         {% for productType in object_list %}
             <p>
