@@ -12,7 +12,11 @@
            role="button">Transactions</a>
     </h2>
     <ul>
+<<<<<<< HEAD
 
+=======
+        {% if request.user.is_authenticated %}
+>>>>>>> a68b9a92bc5af8728f53322fca513099a9a1ec94
         <h2>Your Products:</h2>
         {% for productType in object_list %}
             <p>
@@ -23,16 +27,19 @@
             {% for productT in productType.product.all %}
                 {% if productT.Owner  == request.user.profile %}
                     <ul>
-                        <li>
-                            <a href="{{ productT.get_absolute_url }}"
+                            <h2><a href="{{ productT.get_absolute_url }}"
                                class="btn btn-secondary btn-lg"
-                               role="button">{{ productT.name }}</a>
-                        </li>
+                               role="button">{{ productT.name }}</a></h2>
                     </ul>
                 {% endif %}
             {% endfor %}
         {% endfor %}
+<<<<<<< HEAD
     {% endif %}
+=======
+        <hr>
+        {% endif %}
+>>>>>>> a68b9a92bc5af8728f53322fca513099a9a1ec94
         <h2>All Products:</h2>
         {% for productType in object_list %}
             <p>
@@ -44,7 +51,8 @@
                 {% if productT.Owner  != request.user.profile %}
                     <ul>
                         <li>
-                            <a href= "{{ productT.get_absolute_url }}">{{ productT.name }}</a>
+                            <h2><a href= "{{ productT.get_absolute_url }}" class="btn btn-secondary btn-lg"
+                            role="button">{{ productT.name }}</a></h2>
                         </li>
                     </ul>
                 {% endif %}
