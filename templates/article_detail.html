@@ -34,7 +34,7 @@
     <p>
         <small>Updated on: {{ article.updated_on }}</small>
     </p>
-    <h2>Other Articles by {{ request.user.profile }}</h2>
+    <h2>Other Articles by {{ article.author }}</h2>
     <ul>
         {% for other_article in request.user.profile.article_set.all %}
             {% if other_article != object %}
