@@ -26,7 +26,17 @@ class ProfileCreateView(CreateView):
     model = Profile
     form_class = ProfileCreateForm
     template_name = 'profile_create.html'
+    
+    def form_valid(self, form):
+        if form.is_valid():
+            profile=Profile()
+            profile.user=self.request.user
+            profile.display_name=form.cleaned_data.get('display_name')
+            profile.email=form.cleaned_data.get('email')
+            profile.user.user_id=form.cleaned_data.get('user_id')
+            profile.save()
+        return HttpResponseRedirect(reverse('home'))
+    
 
     def get_success_url(self) -> str:
         return reverse('home')
-
